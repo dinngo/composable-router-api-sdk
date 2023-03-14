@@ -24,7 +24,7 @@ export type ToFields<T> = {
 
 export interface LogicFormData<TFields = any> {
   rid: string;
-  fields: ToObjectFields<TFields>;
+  fields: TFields;
 }
 
 export interface RouterFormData {
@@ -43,4 +43,6 @@ export interface RouterFormDataEstimateResult {
   permitData?: PermitBatchData;
 }
 
-export type FlashLoanFields = TokensOutFields<{ id: string; isLoan: boolean }>;
+export type FlashLoanFields = ToObjectFields<TokensOutFields<{ id: string; isLoan: boolean }>>;
+
+export type FlashLoanFormData = LogicFormData<FlashLoanFields>;

@@ -1,9 +1,10 @@
-import { LogicFormData } from '../../types';
-import * as common from '@composable-router/common';
+import { LogicFormData, ToObjectFields } from 'src/types';
 import { protocols } from '@composable-router/protocol-logics';
 
-export type SendTokenFormData = LogicFormData<protocols.utility.SendTokenLogicFields>;
+export type SendTokenFields = ToObjectFields<protocols.utility.SendTokenLogicFields>;
 
-export function newSendTokenFormData(input: common.TokenAmountObject, recipient: string): SendTokenFormData {
-  return { rid: protocols.utility.SendTokenLogic.rid, fields: { input, recipient } };
+export type SendTokenFormData = LogicFormData<SendTokenFields>;
+
+export function newSendTokenFormData(fields: SendTokenFields): SendTokenFormData {
+  return { rid: protocols.utility.SendTokenLogic.rid, fields };
 }

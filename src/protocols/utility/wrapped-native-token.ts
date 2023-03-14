@@ -1,12 +1,10 @@
-import { LogicFormData } from '../../types';
-import * as common from '@composable-router/common';
+import { LogicFormData, ToObjectFields } from 'src/types';
 import { protocols } from '@composable-router/protocol-logics';
 
-export type WrappedNativeTokenFormData = LogicFormData<protocols.utility.WrappedNativeTokenLogicFields>;
+export type WrappedNativeTokenFields = ToObjectFields<protocols.utility.WrappedNativeTokenLogicFields>;
 
-export function newWrappedNativeTokenFormData(
-  input: common.TokenAmountObject,
-  output: common.TokenAmountObject
-): WrappedNativeTokenFormData {
-  return { rid: protocols.utility.WrappedNativeTokenLogic.rid, fields: { input, output } };
+export type WrappedNativeTokenFormData = LogicFormData<WrappedNativeTokenFields>;
+
+export function newWrappedNativeTokenFormData(fields: WrappedNativeTokenFields): WrappedNativeTokenFormData {
+  return { rid: protocols.utility.WrappedNativeTokenLogic.rid, fields };
 }
