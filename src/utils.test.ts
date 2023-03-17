@@ -7,7 +7,7 @@ import { toFields } from './utils';
 
 describe('Test toFields', function () {
   it('TokenToTokenFields', function () {
-    const fieldsObject: ToObjectFields<core.TokenToTokenFields> = {
+    const fieldsObject: ToObjectFields<core.TokenToTokenExactInFields> = {
       input: { token: mainnetTokens.ETH, amount: '1' },
       output: { token: mainnetTokens.USDC, amount: '1' },
     };

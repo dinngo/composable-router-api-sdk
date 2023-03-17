@@ -23,6 +23,7 @@ export type ToFields<T> = {
 };
 
 export interface LogicFormData<TFields = any> {
+  id: string;
   rid: string;
   fields: TFields;
 }
