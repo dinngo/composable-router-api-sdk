@@ -8,10 +8,10 @@ const common = tslib_1.__importStar(require("@composable-router/common"));
 const core = tslib_1.__importStar(require("@composable-router/core"));
 const tokens_1 = require("./tokens");
 let WithdrawLogic = class WithdrawLogic extends core.Logic {
-    getSupportedTokens() {
+    getTokenList() {
         return tokens_1.tokenPairs.map((tokenPair) => [tokenPair.cToken, tokenPair.underlyingToken]);
     }
-    async getPrice(params) {
+    async quote(params) {
         const { input, tokenOut } = params;
         const cToken = contracts_1.CErc20__factory.connect(input.token.address, this.provider);
         const exchangeRateCurrent = await cToken.callStatic.exchangeRateCurrent();

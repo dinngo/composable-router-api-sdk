@@ -4,9 +4,9 @@ import * as core from '@composable-router/core';
 export type BorrowLogicFields = core.TokenOutFields<{
     interestRateMode: InterestRateMode;
 }>;
-export declare class BorrowLogic extends core.Logic implements core.LogicInterfaceGetSupportedTokens {
+export declare class BorrowLogic extends core.Logic implements core.LogicTokenListInterface {
     static readonly supportedChainIds: common.ChainId[];
-    getSupportedTokens(): Promise<common.Token[]>;
+    getTokenList(): Promise<common.Token[]>;
     getLogic(fields: BorrowLogicFields): Promise<{
         to: string;
         data: string;

@@ -6,13 +6,13 @@ const ethers_1 = require("ethers");
 const common = tslib_1.__importStar(require("@composable-router/common"));
 const core = tslib_1.__importStar(require("@composable-router/core"));
 let WrappedNativeTokenLogic = class WrappedNativeTokenLogic extends core.Logic {
-    getSupportedTokens() {
+    getTokenList() {
         return [
             [this.nativeToken, this.wrappedNativeToken],
             [this.wrappedNativeToken, this.nativeToken],
         ];
     }
-    getPrice(params) {
+    quote(params) {
         const { input, tokenOut } = params;
         const output = new common.TokenAmount(tokenOut, input.amount);
         return output;
@@ -23,7 +23,7 @@ let WrappedNativeTokenLogic = class WrappedNativeTokenLogic extends core.Logic {
         const iface = common.WETH__factory.createInterface();
         let data;
         let amountOffset;
-        if (input.token.isNative()) {
+        if (input.token.isNative) {
             data = iface.encodeFunctionData('deposit');
             if (amountBps)
                 amountOffset = ethers_1.constants.MaxUint256;

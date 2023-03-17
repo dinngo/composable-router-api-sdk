@@ -8,7 +8,7 @@ const common = tslib_1.__importStar(require("@composable-router/common"));
 const core = tslib_1.__importStar(require("@composable-router/core"));
 const tokens_1 = require("./tokens");
 let RepayLogic = class RepayLogic extends core.Logic {
-    getSupportedTokens() {
+    getTokenList() {
         return Object.values(tokens_1.underlyingTokens);
     }
     async getDebt(borrower, underlyingToken) {
@@ -24,7 +24,7 @@ let RepayLogic = class RepayLogic extends core.Logic {
         const to = cToken.address;
         let data;
         let amountOffset;
-        if (input.token.isNative()) {
+        if (input.token.isNative) {
             data = contracts_1.CEther__factory.createInterface().encodeFunctionData('repayBorrowBehalf', [borrower]);
             if (amountBps)
                 amountOffset = ethers_1.constants.MaxUint256;

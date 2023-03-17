@@ -1,11 +1,11 @@
 import * as common from '@composable-router/common';
 import * as core from '@composable-router/core';
 export type WithdrawLogicParams = core.TokenToTokenExactInParams;
-export type WithdrawLogicFields = core.TokenToTokenFields;
-export declare class WithdrawLogic extends core.Logic implements core.LogicInterfaceGetSupportedTokens, core.LogicInterfaceGetPrice {
+export type WithdrawLogicFields = core.TokenToTokenExactInFields;
+export declare class WithdrawLogic extends core.Logic implements core.LogicTokenListInterface, core.LogicOracleInterface {
     static readonly supportedChainIds: common.ChainId[];
-    getSupportedTokens(): common.Token[][];
-    getPrice(params: WithdrawLogicParams): Promise<common.TokenAmount>;
+    getTokenList(): common.Token[][];
+    quote(params: WithdrawLogicParams): Promise<common.TokenAmount>;
     getLogic(fields: WithdrawLogicFields): Promise<{
         to: string;
         data: string;

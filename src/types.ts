@@ -43,6 +43,8 @@ export interface RouterFormDataEstimateResult {
   permitData?: PermitBatchData;
 }
 
-export type FlashLoanFields = ToObjectFields<TokensOutFields<{ id: string; isLoan: boolean }>>;
+export type FlashLoanLogicFields = TokensOutFields<{ id: string; isLoan: boolean }>;
+
+export type FlashLoanFields = ToObjectFields<FlashLoanLogicFields>;
 
 export type FlashLoanFormData = LogicFormData<FlashLoanFields>;

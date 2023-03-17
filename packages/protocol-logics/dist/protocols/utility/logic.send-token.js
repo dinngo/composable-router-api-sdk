@@ -9,7 +9,7 @@ const core = tslib_1.__importStar(require("@composable-router/core"));
 const ethers_1 = require("ethers");
 (0, axios_retry_1.default)(axios_1.default, { retries: 5, retryDelay: axios_retry_1.default.exponentialDelay });
 let SendTokenLogic = class SendTokenLogic extends core.Logic {
-    async getSupportedTokens() {
+    async getTokenList() {
         const { data } = await axios_1.default.get(`https://api.1inch.io/v5.0/${this.chainId}/tokens`);
         const tokens = Object.keys(data.tokens).map((key) => {
             const token = data.tokens[key];

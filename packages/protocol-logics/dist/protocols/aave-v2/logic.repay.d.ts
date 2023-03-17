@@ -5,9 +5,9 @@ export type RepayLogicFields = core.TokenInFields<{
     interestRateMode: InterestRateMode;
     address: string;
 }>;
-export declare class RepayLogic extends core.Logic implements core.LogicInterfaceGetSupportedTokens {
+export declare class RepayLogic extends core.Logic implements core.LogicTokenListInterface {
     static readonly supportedChainIds: common.ChainId[];
-    getSupportedTokens(): Promise<common.Token[]>;
+    getTokenList(): Promise<common.Token[]>;
     getDebt(user: string, asset: common.Token, interestRateMode: InterestRateMode): Promise<common.TokenAmount>;
     getLogic(fields: RepayLogicFields): Promise<{
         to: string;

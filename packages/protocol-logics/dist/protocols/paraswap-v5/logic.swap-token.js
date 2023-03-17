@@ -13,7 +13,7 @@ let SwapTokenLogic = class SwapTokenLogic extends core.Logic {
     get sdk() {
         return (0, sdk_1.constructSimpleSDK)({ chainId: this.chainId, axios: axios_1.default });
     }
-    async getPrice(params) {
+    async quote(params) {
         const { input, tokenOut } = params;
         const { destAmount } = await this.sdk.swap.getRate({
             srcToken: input.token.elasticAddress,

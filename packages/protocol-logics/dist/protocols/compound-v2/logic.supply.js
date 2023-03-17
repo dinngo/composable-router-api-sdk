@@ -8,10 +8,10 @@ const common = tslib_1.__importStar(require("@composable-router/common"));
 const core = tslib_1.__importStar(require("@composable-router/core"));
 const tokens_1 = require("./tokens");
 let SupplyLogic = class SupplyLogic extends core.Logic {
-    getSupportedTokens() {
+    getTokenList() {
         return tokens_1.tokenPairs.map((tokenPair) => [tokenPair.underlyingToken, tokenPair.cToken]);
     }
-    async getPrice(params) {
+    async quote(params) {
         const { input, tokenOut } = params;
         const cToken = contracts_1.CErc20__factory.connect(tokenOut.address, this.provider);
         const exchangeRateCurrent = await cToken.callStatic.exchangeRateCurrent();
@@ -24,7 +24,7 @@ let SupplyLogic = class SupplyLogic extends core.Logic {
         const to = output.token.address;
         let data;
         let amountOffset;
-        if (input.token.isNative()) {
+        if (input.token.isNative) {
             data = contracts_1.CEther__factory.createInterface().encodeFunctionData('mint');
             if (amountBps)
                 amountOffset = ethers_1.constants.MaxUint256;

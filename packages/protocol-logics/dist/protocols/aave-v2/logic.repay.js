@@ -9,7 +9,7 @@ const common = tslib_1.__importStar(require("@composable-router/common"));
 const core = tslib_1.__importStar(require("@composable-router/core"));
 const tiny_invariant_1 = tslib_1.__importDefault(require("tiny-invariant"));
 let RepayLogic = class RepayLogic extends core.Logic {
-    async getSupportedTokens() {
+    async getTokenList() {
         const service = new service_1.Service(this.chainId, this.provider);
         const tokens = await service.getAssets();
         return tokens;
@@ -24,7 +24,7 @@ let RepayLogic = class RepayLogic extends core.Logic {
     }
     async getLogic(fields) {
         const { input, interestRateMode, address, amountBps } = fields;
-        (0, tiny_invariant_1.default)(!input.token.isNative(), 'tokenIn should not be native token');
+        (0, tiny_invariant_1.default)(!input.token.isNative, 'tokenIn should not be native token');
         const service = new service_1.Service(this.chainId, this.provider);
         const to = await service.getLendingPoolAddress();
         const data = contracts_1.LendingPool__factory.createInterface().encodeFunctionData('repay', [

@@ -10,7 +10,7 @@ const common = tslib_1.__importStar(require("@composable-router/common"));
 const core = tslib_1.__importStar(require("@composable-router/core"));
 const config_1 = require("./config");
 let FlashLoanLogic = class FlashLoanLogic extends core.Logic {
-    async getSupportedTokens() {
+    async getTokenList() {
         const service = new service_1.Service(this.chainId, this.provider);
         const tokens = await service.getAssets();
         return tokens;

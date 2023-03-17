@@ -12,7 +12,7 @@ const utils_1 = require("./utils");
 let PermitTokenLogic = class PermitTokenLogic extends core.Logic {
     async getPermitDetails(account, erc20Funds, spender) {
         const details = [];
-        if (!erc20Funds.isEmpty()) {
+        if (!erc20Funds.isEmpty) {
             const iface = contracts_1.Permit2__factory.createInterface();
             const calls = erc20Funds.map((fund) => ({
                 target: (0, config_1.getContractAddress)(this.chainId, 'Permit2'),

@@ -8,20 +8,20 @@ const common = tslib_1.__importStar(require("@composable-router/common"));
 const core = tslib_1.__importStar(require("@composable-router/core"));
 const tiny_invariant_1 = tslib_1.__importDefault(require("tiny-invariant"));
 let DepositLogic = class DepositLogic extends core.Logic {
-    async getSupportedTokens() {
+    async getTokenList() {
         const service = new service_1.Service(this.chainId, this.provider);
         const reserveTokens = await service.getReserveTokens();
         return reserveTokens.map((reserveToken) => [reserveToken.asset, reserveToken.aToken]);
     }
-    async getPrice(params) {
+    async quote(params) {
         const { input, tokenOut } = params;
-        (0, tiny_invariant_1.default)(!input.token.isNative(), 'tokenIn should not be native token');
+        (0, tiny_invariant_1.default)(!input.token.isNative, 'tokenIn should not be native token');
         const output = new common.TokenAmount(tokenOut, input.amount);
         return output;
     }
     async getLogic(fields, options) {
         const { input, amountBps, referralCode = 0 } = fields;
-        (0, tiny_invariant_1.default)(!input.token.isNative(), 'tokenIn should not be native token');
+        (0, tiny_invariant_1.default)(!input.token.isNative, 'tokenIn should not be native token');
         const { account } = options;
         const service = new service_1.Service(this.chainId, this.provider);
         const to = await service.getLendingPoolAddress();

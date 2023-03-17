@@ -8,7 +8,7 @@ const common = tslib_1.__importStar(require("@composable-router/common"));
 const core = tslib_1.__importStar(require("@composable-router/core"));
 const config_1 = require("./config");
 let ClaimCOMPLogic = class ClaimCOMPLogic extends core.Logic {
-    getSupportedTokens() {
+    getTokenList() {
         return [tokens_1.COMP];
     }
     async getReward(owner) {
