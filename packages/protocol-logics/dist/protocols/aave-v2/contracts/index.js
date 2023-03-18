@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SpenderAaveV2Delegation__factory = exports.ProtocolDataProvider__factory = exports.LendingPoolAddressesProvider__factory = exports.LendingPool__factory = exports.FlashLoanCallbackAaveV2__factory = exports.DebtTokenBase__factory = exports.AToken__factory = exports.factories = void 0;
+exports.ProtocolDataProvider__factory = exports.LendingPoolAddressesProvider__factory = exports.LendingPool__factory = exports.FlashLoanCallbackAaveV2__factory = exports.DebtTokenBase__factory = exports.AToken__factory = exports.factories = void 0;
 const tslib_1 = require("tslib");
 exports.factories = tslib_1.__importStar(require("./factories"));
 var AToken__factory_1 = require("./factories/AToken__factory");
@@ -15,6 +15,4 @@ var LendingPoolAddressesProvider__factory_1 = require("./factories/LendingPoolAd
 Object.defineProperty(exports, "LendingPoolAddressesProvider__factory", { enumerable: true, get: function () { return LendingPoolAddressesProvider__factory_1.LendingPoolAddressesProvider__factory; } });
 var ProtocolDataProvider__factory_1 = require("./factories/ProtocolDataProvider__factory");
 Object.defineProperty(exports, "ProtocolDataProvider__factory", { enumerable: true, get: function () { return ProtocolDataProvider__factory_1.ProtocolDataProvider__factory; } });
-var SpenderAaveV2Delegation__factory_1 = require("./factories/SpenderAaveV2Delegation__factory");
-Object.defineProperty(exports, "SpenderAaveV2Delegation__factory", { enumerable: true, get: function () { return SpenderAaveV2Delegation__factory_1.SpenderAaveV2Delegation__factory; } });
 //# sourceMappingURL=index.js.map

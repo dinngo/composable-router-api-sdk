@@ -5,7 +5,10 @@ export type WrappedNativeTokenLogicFields = core.TokenToTokenExactInFields;
 export declare class WrappedNativeTokenLogic extends core.Logic implements core.LogicTokenListInterface, core.LogicOracleInterface {
     static readonly supportedChainIds: common.ChainId[];
     getTokenList(): common.Token[][];
-    quote(params: WrappedNativeTokenLogicParams): common.TokenAmount;
+    quote(params: WrappedNativeTokenLogicParams): {
+        input: common.TokenAmount;
+        output: common.TokenAmount;
+    };
     getLogic(fields: WrappedNativeTokenLogicFields): Promise<{
         to: string;
         data: string;

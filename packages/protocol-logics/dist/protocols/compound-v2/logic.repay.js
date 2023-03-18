@@ -11,12 +11,13 @@ let RepayLogic = class RepayLogic extends core.Logic {
     getTokenList() {
         return Object.values(tokens_1.underlyingTokens);
     }
-    async getDebt(borrower, underlyingToken) {
-        const cToken = (0, tokens_1.toCToken)(underlyingToken);
+    async quote(params) {
+        const { borrower, tokenIn } = params;
+        const cToken = (0, tokens_1.toCToken)(tokenIn);
         const cTokenContract = contracts_1.CErc20__factory.connect(cToken.address, this.provider);
         const borrowBalanceWei = await cTokenContract.callStatic.borrowBalanceCurrent(borrower);
-        const debt = new common.TokenAmount(underlyingToken).setWei(borrowBalanceWei);
-        return debt;
+        const input = new common.TokenAmount(tokenIn).setWei(borrowBalanceWei);
+        return { borrower, input };
     }
     async getLogic(fields) {
         const { borrower, input, amountBps } = fields;

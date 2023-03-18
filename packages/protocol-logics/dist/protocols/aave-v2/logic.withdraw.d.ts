@@ -6,7 +6,10 @@ export type WithdrawLogicOptions = Pick<core.GlobalOptions, 'account'>;
 export declare class WithdrawLogic extends core.Logic implements core.LogicTokenListInterface, core.LogicOracleInterface {
     static readonly supportedChainIds: common.ChainId[];
     getTokenList(): Promise<common.Token[][]>;
-    quote(params: WithdrawLogicParams): Promise<common.TokenAmount>;
+    quote(params: WithdrawLogicParams): Promise<{
+        input: common.TokenAmount;
+        output: common.TokenAmount;
+    }>;
     getLogic(fields: WithdrawLogicFields, options: WithdrawLogicOptions): Promise<{
         to: string;
         data: string;

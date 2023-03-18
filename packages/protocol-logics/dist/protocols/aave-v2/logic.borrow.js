@@ -2,11 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BorrowLogic = void 0;
 const tslib_1 = require("tslib");
-const service_1 = require("./service");
 const contracts_1 = require("./contracts");
+const service_1 = require("./service");
 const common = tslib_1.__importStar(require("@composable-router/common"));
 const core = tslib_1.__importStar(require("@composable-router/core"));
-const config_1 = require("./config");
 const tiny_invariant_1 = tslib_1.__importDefault(require("tiny-invariant"));
 let BorrowLogic = class BorrowLogic extends core.Logic {
     async getTokenList() {
@@ -14,14 +13,18 @@ let BorrowLogic = class BorrowLogic extends core.Logic {
         const tokens = await service.getAssets();
         return tokens;
     }
-    async getLogic(fields) {
-        const { output, interestRateMode } = fields;
+    async getLogic(fields, options) {
+        const { output, interestRateMode, referralCode = 0 } = fields;
         (0, tiny_invariant_1.default)(!output.token.isNative, 'tokenOut should not be native token');
-        const to = (0, config_1.getContractAddress)(this.chainId, 'SpenderAaveV2Delegation');
-        const data = contracts_1.SpenderAaveV2Delegation__factory.createInterface().encodeFunctionData('borrow', [
+        const { account } = options;
+        const service = new service_1.Service(this.chainId, this.provider);
+        const to = await service.getLendingPoolAddress();
+        const data = contracts_1.LendingPool__factory.createInterface().encodeFunctionData('borrow', [
             output.token.address,
             output.amountWei,
             interestRateMode,
+            referralCode,
+            account,
         ]);
         return core.newLogic({ to, data });
     }

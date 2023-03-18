@@ -23,7 +23,7 @@ let SwapTokenLogic = class SwapTokenLogic extends core.Logic {
             destDecimals: tokenOut.decimals,
         });
         const output = new common.TokenAmount(tokenOut, destAmount);
-        return output;
+        return { input, output };
     }
     async getLogic(fields, options) {
         const { input, output, partner, partnerAddress } = fields;

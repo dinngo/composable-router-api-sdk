@@ -7,7 +7,10 @@ export type SwapTokenLogicOptions = Pick<core.GlobalOptions, 'account' | 'slippa
 export declare class SwapTokenLogic extends core.Logic implements core.LogicOracleInterface {
     static readonly supportedChainIds: common.ChainId[];
     get sdk(): import("@paraswap/sdk").SimpleFetchSDK;
-    quote(params: SwapTokenLogicParams): Promise<common.TokenAmount>;
+    quote(params: SwapTokenLogicParams): Promise<{
+        input: common.TokenAmount;
+        output: common.TokenAmount;
+    }>;
     getLogic(fields: SwapTokenLogicFields, options: SwapTokenLogicOptions): Promise<{
         to: string;
         data: string;

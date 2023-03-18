@@ -15,7 +15,7 @@ let WrappedNativeTokenLogic = class WrappedNativeTokenLogic extends core.Logic {
     quote(params) {
         const { input, tokenOut } = params;
         const output = new common.TokenAmount(tokenOut, input.amount);
-        return output;
+        return { input, output };
     }
     async getLogic(fields) {
         const { input, amountBps } = fields;

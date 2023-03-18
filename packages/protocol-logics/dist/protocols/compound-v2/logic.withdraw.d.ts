@@ -5,7 +5,10 @@ export type WithdrawLogicFields = core.TokenToTokenExactInFields;
 export declare class WithdrawLogic extends core.Logic implements core.LogicTokenListInterface, core.LogicOracleInterface {
     static readonly supportedChainIds: common.ChainId[];
     getTokenList(): common.Token[][];
-    quote(params: WithdrawLogicParams): Promise<common.TokenAmount>;
+    quote(params: WithdrawLogicParams): Promise<{
+        input: common.TokenAmount;
+        output: common.TokenAmount;
+    }>;
     getLogic(fields: WithdrawLogicFields): Promise<{
         to: string;
         data: string;

@@ -17,7 +17,7 @@ let WithdrawLogic = class WithdrawLogic extends core.Logic {
         const exchangeRateCurrent = await cToken.callStatic.exchangeRateCurrent();
         const amountOutWei = input.amountWei.mul(exchangeRateCurrent).div(ethers_1.BigNumber.from(10).pow(18));
         const output = new common.TokenAmount(tokenOut).setWei(amountOutWei);
-        return output;
+        return { input, output };
     }
     async getLogic(fields) {
         const { input, amountBps } = fields;

@@ -17,7 +17,7 @@ let DepositLogic = class DepositLogic extends core.Logic {
         const { input, tokenOut } = params;
         (0, tiny_invariant_1.default)(!input.token.isNative, 'tokenIn should not be native token');
         const output = new common.TokenAmount(tokenOut, input.amount);
-        return output;
+        return { input, output };
     }
     async getLogic(fields, options) {
         const { input, amountBps, referralCode = 0 } = fields;

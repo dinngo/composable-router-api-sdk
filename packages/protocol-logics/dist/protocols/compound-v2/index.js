@@ -4,7 +4,7 @@ const tslib_1 = require("tslib");
 tslib_1.__exportStar(require("./config"), exports);
 tslib_1.__exportStar(require("./contracts"), exports);
 tslib_1.__exportStar(require("./tokens"), exports);
-tslib_1.__exportStar(require("./logic.claim-comp"), exports);
+tslib_1.__exportStar(require("./logic.claim"), exports);
 tslib_1.__exportStar(require("./logic.repay"), exports);
 tslib_1.__exportStar(require("./logic.supply"), exports);
 tslib_1.__exportStar(require("./logic.withdraw"), exports);

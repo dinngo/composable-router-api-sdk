@@ -1,4 +1,4 @@
-type ContractNames = 'ProtocolDataProvider' | 'SpenderAaveV2Delegation' | 'FlashLoanCallbackAaveV2';
+type ContractNames = 'ProtocolDataProvider' | 'FlashLoanCallbackAaveV2';
 export declare const contractAddressMap: Record<number, {
     [k in ContractNames]: string;
 }>;

@@ -1,12 +1,14 @@
 import * as common from '@composable-router/common';
 import * as core from '@composable-router/core';
-export type RepayLogicFields = core.TokenInFields<{
-    borrower: string;
-}>;
-export declare class RepayLogic extends core.Logic implements core.LogicTokenListInterface {
+export type RepayLogicParams = core.RepayParams;
+export type RepayLogicFields = core.RepayFields;
+export declare class RepayLogic extends core.Logic implements core.LogicTokenListInterface, core.LogicOracleInterface {
     static readonly supportedChainIds: common.ChainId[];
     getTokenList(): common.Token[];
-    getDebt(borrower: string, underlyingToken: common.Token): Promise<common.TokenAmount>;
+    quote(params: RepayLogicParams): Promise<{
+        borrower: string;
+        input: common.TokenAmount;
+    }>;
     getLogic(fields: RepayLogicFields): Promise<{
         to: string;
         data: string;

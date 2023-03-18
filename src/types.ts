@@ -1,4 +1,4 @@
-import { PermitBatchData } from '@uniswap/permit2-sdk';
+import { PermitBatchData, PermitSingleData } from '@uniswap/permit2-sdk';
 import { TokensOutFields } from '@composable-router/core';
 import * as common from '@composable-router/common';
 
@@ -33,7 +33,7 @@ export interface RouterFormData {
   account: string;
   slippage?: number;
   logics: LogicFormData[];
-  permitData?: PermitBatchData;
+  permitData?: PermitSingleData | PermitBatchData;
   permitSig?: string;
 }
 
@@ -41,7 +41,7 @@ export interface RouterFormDataEstimateResult {
   funds: common.TokenAmounts;
   balances: common.TokenAmounts;
   approvals: common.TransactionRequest[];
-  permitData?: PermitBatchData;
+  permitData?: PermitSingleData | PermitBatchData;
 }
 
 export type FlashLoanLogicFields = TokensOutFields<{ id: string; isLoan: boolean }>;

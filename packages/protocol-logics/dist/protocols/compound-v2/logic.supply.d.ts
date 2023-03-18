@@ -5,7 +5,10 @@ export type SupplyLogicFields = core.TokenToTokenExactInFields;
 export declare class SupplyLogic extends core.Logic implements core.LogicTokenListInterface, core.LogicOracleInterface {
     static readonly supportedChainIds: common.ChainId[];
     getTokenList(): common.Token[][];
-    quote(params: SupplyLogicParams): Promise<common.TokenAmount>;
+    quote(params: SupplyLogicParams): Promise<{
+        input: common.TokenAmount;
+        output: common.TokenAmount;
+    }>;
     getLogic(fields: SupplyLogicFields): Promise<{
         to: string;
         data: string;

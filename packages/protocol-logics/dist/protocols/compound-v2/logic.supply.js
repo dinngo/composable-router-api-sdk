@@ -17,7 +17,7 @@ let SupplyLogic = class SupplyLogic extends core.Logic {
         const exchangeRateCurrent = await cToken.callStatic.exchangeRateCurrent();
         const amountOutWei = input.amountWei.mul(ethers_1.BigNumber.from(10).pow(18)).div(exchangeRateCurrent);
         const output = new common.TokenAmount(tokenOut).setWei(amountOutWei);
-        return output;
+        return { input, output };
     }
     async getLogic(fields) {
         const { input, output, amountBps } = fields;

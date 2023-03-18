@@ -17,7 +17,7 @@ let WithdrawLogic = class WithdrawLogic extends core.Logic {
         const { input, tokenOut } = params;
         (0, tiny_invariant_1.default)(!tokenOut.isNative, 'tokenOut should not be native token');
         const output = new common.TokenAmount(tokenOut, input.amount);
-        return output;
+        return { input, output };
     }
     async getLogic(fields, options) {
         const { input, output, amountBps } = fields;

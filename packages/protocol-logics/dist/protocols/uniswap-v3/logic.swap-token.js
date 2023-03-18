@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SwapTokenLogic = exports.isSwapTokenLogicSingleHopFields = exports.isSwapTokenLogicSingleHopQuotation = void 0;
+exports.SwapTokenLogic = exports.isSwapTokenLogicSingleHopFields = void 0;
 const tslib_1 = require("tslib");
 const sdk_core_1 = require("@uniswap/sdk-core");
 const constants_1 = require("./constants");
@@ -14,10 +14,6 @@ const core = tslib_1.__importStar(require("@composable-router/core"));
 const v3_sdk_1 = require("@uniswap/v3-sdk");
 const utils_1 = require("./utils");
 (0, axios_retry_1.default)(axios_1.default, { retries: 5, retryDelay: axios_retry_1.default.exponentialDelay });
-function isSwapTokenLogicSingleHopQuotation(v) {
-    return !!v.fee;
-}
-exports.isSwapTokenLogicSingleHopQuotation = isSwapTokenLogicSingleHopQuotation;
 function isSwapTokenLogicSingleHopFields(v) {
     return !!v.fee;
 }
@@ -64,31 +60,31 @@ let SwapTokenLogic = class SwapTokenLogic extends core.Logic {
         return bestTrade;
     }
     async quote(params) {
-        let quotation;
         if (core.isTokenToTokenExactInParams(params)) {
+            const tradeType = core.TradeType.exactIn;
             const { input, tokenOut } = params;
             const { route, outputAmount } = await this.getExactInBestTrade(input, tokenOut);
-            const amount = outputAmount.toExact();
+            const output = new common.TokenAmount(tokenOut, outputAmount.toExact());
             if (route.pools.length === 1) {
-                quotation = { amount, fee: route.pools[0].fee };
+                return { tradeType, input, output, fee: route.pools[0].fee };
             }
             else {
-                quotation = { amount, path: (0, v3_sdk_1.encodeRouteToPath)(route, false) };
+                return { tradeType, input, output, path: (0, v3_sdk_1.encodeRouteToPath)(route, false) };
             }
         }
         else {
+            const tradeType = core.TradeType.exactOut;
             const { tokenIn, output } = params;
             const { route, inputAmount } = await this.getExactOutBestTrade(tokenIn, output);
             const amountIn = common.calcSlippage(inputAmount.quotient.toString(), -100); // 1% slippage
-            const amount = common.toBigUnit(amountIn, tokenIn.decimals);
+            const input = new common.TokenAmount(tokenIn, common.toBigUnit(amountIn, tokenIn.decimals));
             if (route.pools.length === 1) {
-                quotation = { amount, fee: route.pools[0].fee };
+                return { tradeType, input, output, fee: route.pools[0].fee };
             }
             else {
-                quotation = { amount, path: (0, v3_sdk_1.encodeRouteToPath)(route, true) };
+                return { tradeType, input, output, path: (0, v3_sdk_1.encodeRouteToPath)(route, true) };
             }
         }
-        return quotation;
     }
     // https://github.com/Uniswap/v3-sdk/blob/000fccfbbebadabadfa6d689ebc85a50489d25d4/src/swapRouter.ts#L64
     async getLogic(fields, options) {

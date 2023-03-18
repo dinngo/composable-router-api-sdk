@@ -2,16 +2,6 @@ import { CurrencyAmount } from '@uniswap/sdk-core';
 import { SetOptional } from 'type-fest';
 import * as common from '@composable-router/common';
 import * as core from '@composable-router/core';
-export type SwapTokenLogicSingleHopQuotation = {
-    amount: string;
-    fee: number;
-};
-export type SwapTokenLogicMultiHopQuotation = {
-    amount: string;
-    path: string;
-};
-export type SwapTokenLogicQuotation = SwapTokenLogicSingleHopQuotation | SwapTokenLogicMultiHopQuotation;
-export declare function isSwapTokenLogicSingleHopQuotation(v: any): v is SwapTokenLogicSingleHopQuotation;
 export type SwapTokenLogicParams = core.TokenToTokenParams;
 export type SwapTokenLogicSingleHopFields = core.TokenToTokenFields<{
     fee: number;
@@ -35,7 +25,19 @@ export declare class SwapTokenLogic extends core.Logic implements core.LogicToke
         inputAmount: CurrencyAmount<import("@uniswap/sdk-core").Currency>;
         outputAmount: CurrencyAmount<import("@uniswap/sdk-core").Currency>;
     }>;
-    quote(params: SwapTokenLogicParams): Promise<SwapTokenLogicQuotation>;
+    quote(params: SwapTokenLogicParams): Promise<{
+        tradeType: core.TradeType;
+        input: common.TokenAmount;
+        output: common.TokenAmount;
+        fee: import("@uniswap/v3-sdk").FeeAmount;
+        path?: undefined;
+    } | {
+        tradeType: core.TradeType;
+        input: common.TokenAmount;
+        output: common.TokenAmount;
+        path: string;
+        fee?: undefined;
+    }>;
     getLogic(fields: SwapTokenLogicFields, options: SwapTokenLogicOptions): Promise<{
         to: string;
         data: string;

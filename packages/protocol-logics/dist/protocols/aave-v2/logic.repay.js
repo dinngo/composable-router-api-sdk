@@ -14,16 +14,17 @@ let RepayLogic = class RepayLogic extends core.Logic {
         const tokens = await service.getAssets();
         return tokens;
     }
-    async getDebt(user, asset, interestRateMode) {
+    async quote(params) {
+        const { borrower, tokenIn, interestRateMode } = params;
         const service = new service_1.Service(this.chainId, this.provider);
-        const { currentStableDebt, currentVariableDebt } = await service.protocolDataProvider.getUserReserveData(asset.address, user);
+        const { currentStableDebt, currentVariableDebt } = await service.protocolDataProvider.getUserReserveData(tokenIn.address, borrower);
         const currentDebt = interestRateMode === types_1.InterestRateMode.variable ? currentVariableDebt : currentStableDebt;
         const amountWei = common.calcSlippage(currentDebt, -100); // slightly higher than the current borrowed amount
-        const debt = new common.TokenAmount(asset).setWei(amountWei);
-        return debt;
+        const input = new common.TokenAmount(tokenIn).setWei(amountWei);
+        return { borrower, interestRateMode, input };
     }
     async getLogic(fields) {
-        const { input, interestRateMode, address, amountBps } = fields;
+        const { input, interestRateMode, borrower, amountBps } = fields;
         (0, tiny_invariant_1.default)(!input.token.isNative, 'tokenIn should not be native token');
         const service = new service_1.Service(this.chainId, this.provider);
         const to = await service.getLendingPoolAddress();
@@ -31,7 +32,7 @@ let RepayLogic = class RepayLogic extends core.Logic {
             input.token.address,
             input.amountWei,
             interestRateMode,
-            address,
+            borrower,
         ]);
         let amountOffset;
         if (amountBps)
