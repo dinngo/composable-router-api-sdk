@@ -65,9 +65,9 @@ export type RepayFields<T = object> = TokenInFields<{
 export type ClaimParams<T = object> = {
     owner: string;
 } & T;
-export type ClaimFields<T = object> = {
+export type ClaimFields<T = object> = TokenOutFields<{
     owner: string;
-} & T;
+}> & T;
 export type FlashLoanFields<T = object> = TokensOutFields<{
     params: string;
 }> & T;
