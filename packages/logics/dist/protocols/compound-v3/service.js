@@ -56,20 +56,19 @@ class Service extends common.Web3Toolkit {
         const data = iface.encodeFunctionData('allow', [manager, isAllowed]);
         return { to, data };
     }
-    async getCollateralBalance(account, marketId, asset) {
+    async getCollateralBalance(marketId, account, asset) {
         const market = (0, config_1.getMarket)(this.chainId, marketId);
         const contractComet = contracts_1.Comet__factory.connect(market.cometAddress, this.provider);
         const collateralBalance = await contractComet.collateralBalanceOf(account, asset.wrapped.address);
         return new common.TokenAmount(asset).setWei(collateralBalance);
     }
-    async getBorrowBalance(account, marketId) {
+    async getDebt(marketId, borrower) {
         const market = (0, config_1.getMarket)(this.chainId, marketId);
-        const baseToken = await this.getBaseToken(market.id);
         const contractComet = contracts_1.Comet__factory.connect(market.cometAddress, this.provider);
-        const collateralBalance = await contractComet.borrowBalanceOf(account);
-        return new common.TokenAmount(baseToken).setWei(collateralBalance);
+        const debt = await contractComet.borrowBalanceOf(borrower);
+        return debt;
     }
-    async getUserPrincipal(account, marketId) {
+    async getUserPrincipal(marketId, account) {
         const market = (0, config_1.getMarket)(this.chainId, marketId);
         const baseToken = await this.getBaseToken(market.id);
         const contractComet = contracts_1.Comet__factory.connect(market.cometAddress, this.provider);

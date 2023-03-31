@@ -8,6 +8,6 @@ export interface NewRouterExecuteTransactionOptions {
     routerLogics: IParam.LogicStruct[];
     tokensReturn?: string[];
     value?: BigNumberish;
-    referral?: number;
+    referralCode?: number;
 }
 export declare function newRouterExecuteTransactionRequest(options: NewRouterExecuteTransactionOptions): common.TransactionRequest;

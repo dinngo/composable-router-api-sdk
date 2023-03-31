@@ -11,14 +11,6 @@ export interface MarketConfig {
     id: string;
     cometAddress: string;
     baseTokenAddress: string;
-    bulker: {
-        address: string;
-        abi: string;
-        actions: {
-            supplyNativeToken: string | number;
-            withdrawNativeToken: string | number;
-        };
-    };
 }
 export declare const marketsMap: Record<number, MarketConfig[]>;
 export declare const marketMap: Record<number, Record<string, MarketConfig>>;

@@ -35,6 +35,7 @@ export interface RouterFormData {
   logics: LogicFormData[];
   permitData?: PermitSingleData | PermitBatchData;
   permitSig?: string;
+  referralCode?: number;
 }
 
 export interface RouterFormDataEstimateResult {

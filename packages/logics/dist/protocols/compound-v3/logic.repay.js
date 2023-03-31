@@ -23,18 +23,32 @@ let RepayLogic = class RepayLogic extends core.Logic {
         }
         return tokenList;
     }
-    async getLogic(fields, options) {
-        const { marketId, input, repayAll } = fields;
-        const { account } = options;
+    async quote(params) {
+        const { marketId, borrower, tokenIn } = params;
+        const service = new service_1.Service(this.chainId, this.provider);
+        const debt = await service.getDebt(marketId, borrower);
+        const amountWei = common.calcSlippage(debt, -100); // slightly higher than the current borrowed amount
+        const input = new common.TokenAmount(tokenIn).setWei(amountWei);
+        return { marketId, borrower, input };
+    }
+    async getLogic(fields) {
+        const { marketId, borrower, input, amountBps } = fields;
         const market = (0, config_1.getMarket)(this.chainId, marketId);
         const tokenIn = input.token.wrapped;
+        const quotation = await this.quote({ marketId, borrower, tokenIn: input.token });
+        const repayAll = amountBps === common.BPS_BASE || input.amountWei.gte(quotation.input.amountWei);
         const to = market.cometAddress;
         const data = contracts_1.Comet__factory.createInterface().encodeFunctionData('supplyTo', [
-            account,
+            borrower,
             tokenIn.address,
             repayAll ? ethers_1.constants.MaxUint256 : input.amountWei,
         ]);
-        const inputs = [core.newLogicInput({ input: new common.TokenAmount(tokenIn, input.amount) })];
+        const options = { input: new common.TokenAmount(tokenIn, input.amount) };
+        if (amountBps && !repayAll) {
+            options.amountBps = amountBps;
+            options.amountOffset = common.getParamOffset(2);
+        }
+        const inputs = [core.newLogicInput(options)];
         const wrapMode = input.token.isNative ? core.WrapMode.wrapBefore : core.WrapMode.none;
         return core.newLogic({ to, data, inputs, wrapMode });
     }

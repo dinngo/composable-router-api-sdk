@@ -37,7 +37,7 @@
   "devDependencies": {
     "@composable-router/common": "file:./packages/common",
     "@composable-router/core": "file:./packages/core",
-    "@composable-router/protocol-logics": "file:./packages/protocol-logics",
+    "@composable-router/logics": "file:./packages/logics",
     "@composable-router/test-helpers": "file:./packages/test-helpers",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.8",

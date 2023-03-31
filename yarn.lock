@@ -25,7 +25,7 @@
     ethers "^5.7.2"
     tiny-invariant "^1.3.1"
 
-"@composable-router/protocol-logics@file:./packages/protocol-logics":
+"@composable-router/logics@file:./packages/logics":
   version "0.1.0"
   dependencies:
     "@paraswap/sdk" "^6.1.2"
