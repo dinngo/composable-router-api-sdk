@@ -26,7 +26,12 @@ let FlashLoanLogic = class FlashLoanLogic extends core.Logic {
         return core.newLogic({ to, data, callback });
     }
 };
-FlashLoanLogic.supportedChainIds = [common.ChainId.mainnet];
+FlashLoanLogic.supportedChainIds = [
+    common.ChainId.mainnet,
+    common.ChainId.polygon,
+    common.ChainId.arbitrum,
+    common.ChainId.optimism,
+];
 FlashLoanLogic = tslib_1.__decorate([
     core.LogicDefinitionDecorator()
 ], FlashLoanLogic);

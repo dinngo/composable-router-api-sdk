@@ -23,14 +23,16 @@ let WithdrawCollateralLogic = class WithdrawCollateralLogic extends core.Logic {
         const { account } = options;
         const market = (0, config_1.getMarket)(this.chainId, marketId);
         const userAgent = core.calcAccountAgent(this.chainId, account);
+        const tokenOut = output.token.wrapped;
         const to = market.cometAddress;
         const data = contracts_1.Comet__factory.createInterface().encodeFunctionData('withdrawFrom', [
             account,
             userAgent,
-            output.token.address,
+            tokenOut.address,
             output.amountWei,
         ]);
-        return core.newLogic({ to, data });
+        const wrapMode = output.token.isNative ? core.WrapMode.unwrapAfter : core.WrapMode.none;
+        return core.newLogic({ to, data, wrapMode });
     }
 };
 WithdrawCollateralLogic.supportedChainIds = [common.ChainId.mainnet, common.ChainId.polygon];

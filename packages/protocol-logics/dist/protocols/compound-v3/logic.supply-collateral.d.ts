@@ -11,6 +11,7 @@ export declare class SupplyCollateralLogic extends core.Logic implements core.Lo
         to: string;
         data: string;
         inputs: core.IParam.InputStruct[];
+        wrapMode: number;
         approveTo: string;
         callback: string;
     }>;

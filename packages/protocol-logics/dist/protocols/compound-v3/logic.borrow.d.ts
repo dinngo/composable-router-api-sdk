@@ -6,11 +6,12 @@ export type BorrowLogicFields = core.TokenOutFields<{
 export type BorrowLogicOptions = Pick<core.GlobalOptions, 'account'>;
 export declare class BorrowLogic extends core.Logic implements core.LogicTokenListInterface {
     static readonly supportedChainIds: common.ChainId[];
-    getTokenList(): Promise<Record<string, common.Token>>;
+    getTokenList(): Promise<Record<string, common.Token[]>>;
     getLogic(fields: BorrowLogicFields, options: BorrowLogicOptions): Promise<{
         to: string;
         data: string;
         inputs: core.IParam.InputStruct[];
+        wrapMode: number;
         approveTo: string;
         callback: string;
     }>;

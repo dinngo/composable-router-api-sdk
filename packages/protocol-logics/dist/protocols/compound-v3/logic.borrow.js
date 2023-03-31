@@ -14,7 +14,11 @@ let BorrowLogic = class BorrowLogic extends core.Logic {
         const service = new service_1.Service(this.chainId, this.provider);
         for (const market of markets) {
             const baseToken = await service.getBaseToken(market.id);
-            tokenList[market.id] = baseToken;
+            tokenList[market.id] = [];
+            if (baseToken.isWrapped) {
+                tokenList[market.id].push(baseToken.unwrapped);
+            }
+            tokenList[market.id].push(baseToken);
         }
         return tokenList;
     }
@@ -23,14 +27,16 @@ let BorrowLogic = class BorrowLogic extends core.Logic {
         const { account } = options;
         const market = (0, config_1.getMarket)(this.chainId, marketId);
         const userAgent = core.calcAccountAgent(this.chainId, account);
+        const tokenOut = output.token.wrapped;
         const to = market.cometAddress;
         const data = contracts_1.Comet__factory.createInterface().encodeFunctionData('withdrawFrom', [
             account,
             userAgent,
-            output.token.address,
+            tokenOut.address,
             output.amountWei,
         ]);
-        return core.newLogic({ to, data });
+        const wrapMode = output.token.isNative ? core.WrapMode.unwrapAfter : core.WrapMode.none;
+        return core.newLogic({ to, data, wrapMode });
     }
 };
 BorrowLogic.supportedChainIds = [common.ChainId.mainnet, common.ChainId.polygon];

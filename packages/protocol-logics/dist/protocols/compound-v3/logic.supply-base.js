@@ -2,12 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SupplyBaseLogic = void 0;
 const tslib_1 = require("tslib");
-const ethers_1 = require("ethers");
 const contracts_1 = require("./contracts");
 const service_1 = require("./service");
 const common = tslib_1.__importStar(require("@composable-router/common"));
 const core = tslib_1.__importStar(require("@composable-router/core"));
-const utils_1 = require("./utils");
 const config_1 = require("./config");
 let SupplyBaseLogic = class SupplyBaseLogic extends core.Logic {
     async getTokenList() {
@@ -16,7 +14,11 @@ let SupplyBaseLogic = class SupplyBaseLogic extends core.Logic {
         const service = new service_1.Service(this.chainId, this.provider);
         for (const market of markets) {
             const { cToken, baseToken } = await service.getCometTokens(market.id);
-            tokenList[market.id] = [baseToken.unwrapped, cToken];
+            tokenList[market.id] = [];
+            if (baseToken.isWrapped) {
+                tokenList[market.id].push([baseToken.unwrapped, cToken]);
+            }
+            tokenList[market.id].push([baseToken, cToken]);
         }
         return tokenList;
     }
@@ -25,30 +27,18 @@ let SupplyBaseLogic = class SupplyBaseLogic extends core.Logic {
         const output = new common.TokenAmount(tokenOut, input.amount);
         return { marketId, input, output };
     }
-    async getLogic(fields, options) {
+    async getLogic(fields) {
         const { marketId, input, amountBps } = fields;
         const market = (0, config_1.getMarket)(this.chainId, marketId);
-        let to;
-        let data;
-        let amountOffset;
-        if (input.token.isNative) {
-            const userAgent = core.calcAccountAgent(this.chainId, options.account);
-            to = market.bulker.address;
-            data = new ethers_1.utils.Interface(market.bulker.abi).encodeFunctionData('invoke', [
-                [market.bulker.actions.supplyNativeToken],
-                [(0, utils_1.encodeSupplyNativeTokenAction)(market.cometAddress, userAgent, input.amountWei)],
-            ]);
-            if (amountBps)
-                amountOffset = ethers_1.constants.MaxUint256;
-        }
-        else {
-            to = market.cometAddress;
-            data = contracts_1.Comet__factory.createInterface().encodeFunctionData('supply', [input.token.address, input.amountWei]);
-            if (amountBps)
-                amountOffset = common.getParamOffset(1);
-        }
-        const inputs = [core.newLogicInput({ input, amountBps, amountOffset })];
-        return core.newLogic({ to, data, inputs });
+        const tokenIn = input.token.wrapped;
+        const to = market.cometAddress;
+        const data = contracts_1.Comet__factory.createInterface().encodeFunctionData('supply', [tokenIn.address, input.amountWei]);
+        const amountOffset = amountBps ? common.getParamOffset(1) : undefined;
+        const inputs = [
+            core.newLogicInput({ input: new common.TokenAmount(tokenIn, input.amount), amountBps, amountOffset }),
+        ];
+        const wrapMode = input.token.isNative ? core.WrapMode.wrapBefore : core.WrapMode.none;
+        return core.newLogic({ to, data, inputs, wrapMode });
     }
 };
 SupplyBaseLogic.supportedChainIds = [common.ChainId.mainnet, common.ChainId.polygon];

@@ -9,7 +9,6 @@ const contracts_1 = require("./contracts");
 const axios_1 = tslib_1.__importDefault(require("axios"));
 const axios_retry_1 = tslib_1.__importDefault(require("axios-retry"));
 const common = tslib_1.__importStar(require("@composable-router/common"));
-const ethers_1 = require("ethers");
 const core = tslib_1.__importStar(require("@composable-router/core"));
 const v3_sdk_1 = require("@uniswap/v3-sdk");
 const utils_1 = require("./utils");
@@ -88,15 +87,15 @@ let SwapTokenLogic = class SwapTokenLogic extends core.Logic {
     }
     // https://github.com/Uniswap/v3-sdk/blob/000fccfbbebadabadfa6d689ebc85a50489d25d4/src/swapRouter.ts#L64
     async getLogic(fields, options) {
-        const { tradeType, input, output } = fields;
+        const { tradeType, input, output, amountBps } = fields;
         const { account, slippage = 100 } = options;
         const recipient = core.calcAccountAgent(this.chainId, account);
         const deadline = (0, utils_1.getDeadline)(this.chainId);
         const amountIn = input.amountWei;
         const amountOut = tradeType === core.TradeType.exactIn ? common.calcSlippage(output.amountWei, slippage) : output.amountWei;
-        const routerMustCustody = output.token.isNative;
         const iface = contracts_1.SwapRouter__factory.createInterface();
-        const datas = [];
+        let data;
+        let amountOffset;
         if (isSwapTokenLogicSingleHopFields(fields)) {
             const tokenIn = input.token.wrapped.address;
             const tokenOut = output.token.wrapped.address;
@@ -105,60 +104,63 @@ let SwapTokenLogic = class SwapTokenLogic extends core.Logic {
                     tokenIn,
                     tokenOut,
                     fee: fields.fee,
-                    recipient: routerMustCustody ? ethers_1.constants.AddressZero : recipient,
+                    recipient,
                     deadline,
                     amountIn,
                     amountOutMinimum: amountOut,
                     sqrtPriceLimitX96: 0,
                 };
-                datas.push(iface.encodeFunctionData('exactInputSingle', [params]));
+                data = iface.encodeFunctionData('exactInputSingle', [params]);
+                if (amountBps)
+                    amountOffset = common.getParamOffset(5);
             }
             else {
                 const params = {
                     tokenIn,
                     tokenOut,
                     fee: fields.fee,
-                    recipient: routerMustCustody ? ethers_1.constants.AddressZero : recipient,
+                    recipient,
                     deadline,
-                    amountOut: output.amountWei,
+                    amountOut,
                     amountInMaximum: amountIn,
                     sqrtPriceLimitX96: 0,
                 };
-                datas.push(iface.encodeFunctionData('exactOutputSingle', [params]));
+                data = iface.encodeFunctionData('exactOutputSingle', [params]);
             }
         }
         else {
             if (tradeType === core.TradeType.exactIn) {
                 const params = {
                     path: fields.path,
-                    recipient: routerMustCustody ? ethers_1.constants.AddressZero : recipient,
+                    recipient,
                     deadline,
                     amountIn,
                     amountOutMinimum: amountOut,
                 };
-                datas.push(iface.encodeFunctionData('exactInput', [params]));
+                data = iface.encodeFunctionData('exactInput', [params]);
+                if (amountBps)
+                    amountOffset = common.getParamOffset(3);
             }
             else {
                 const params = {
                     path: fields.path,
-                    recipient: routerMustCustody ? ethers_1.constants.AddressZero : recipient,
+                    recipient,
                     deadline,
                     amountOut,
                     amountInMaximum: amountIn,
                 };
-                datas.push(iface.encodeFunctionData('exactOutput', [params]));
+                data = iface.encodeFunctionData('exactOutput', [params]);
             }
         }
-        if (routerMustCustody) {
-            datas.push(iface.encodeFunctionData('unwrapWETH9', [amountOut, recipient]));
-        }
-        if (input.token.isNative && tradeType === core.TradeType.exactOut) {
-            datas.push(iface.encodeFunctionData('refundETH'));
-        }
-        const to = constants_1.SWAP_ROUTER_ADDRESS;
-        const data = datas.length === 1 ? datas[0] : iface.encodeFunctionData('multicall', [datas]);
-        const inputs = [core.newLogicInput({ input })];
-        return core.newLogic({ to, data, inputs });
+        const inputs = [
+            core.newLogicInput({ input: new common.TokenAmount(input.token.wrapped, input.amount), amountBps, amountOffset }),
+        ];
+        const wrapMode = input.token.isNative
+            ? core.WrapMode.wrapBefore
+            : output.token.isNative
+                ? core.WrapMode.unwrapAfter
+                : core.WrapMode.none;
+        return core.newLogic({ to: constants_1.SWAP_ROUTER_ADDRESS, data, inputs, wrapMode });
     }
 };
 SwapTokenLogic.supportedChainIds = [

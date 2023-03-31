@@ -12,6 +12,7 @@ export declare class ClaimLogic extends core.Logic implements core.LogicTokenLis
         to: string;
         data: string;
         inputs: core.IParam.InputStruct[];
+        wrapMode: number;
         approveTo: string;
         callback: string;
     }>;

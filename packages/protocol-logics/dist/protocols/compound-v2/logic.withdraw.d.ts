@@ -13,6 +13,7 @@ export declare class WithdrawLogic extends core.Logic implements core.LogicToken
         to: string;
         data: string;
         inputs: core.IParam.InputStruct[];
+        wrapMode: number;
         approveTo: string;
         callback: string;
     }>;

@@ -13,4 +13,5 @@ export declare class Service extends common.Web3Toolkit {
     getBorrowBalance(account: string, marketId: string): Promise<common.TokenAmount>;
     getUserPrincipal(account: string, marketId: string): Promise<common.TokenAmount>;
     getRewardOwed(marketId: string, owner: string): Promise<common.TokenAmount>;
+    canSupply(marketId: string, supply: common.TokenAmount): Promise<any>;
 }

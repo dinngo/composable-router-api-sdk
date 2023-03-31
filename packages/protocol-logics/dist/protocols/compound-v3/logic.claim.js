@@ -18,15 +18,24 @@ let ClaimLogic = class ClaimLogic extends core.Logic {
         const output = await service.getRewardOwed(marketId, owner);
         return { marketId, owner, output };
     }
-    async getLogic(fields) {
+    async getLogic(fields, options) {
         const { marketId, owner } = fields;
+        const { account } = options;
         const market = (0, config_1.getMarket)(this.chainId, marketId);
         const to = (0, config_1.getContractAddress)(this.chainId, 'CometRewards');
-        const data = contracts_1.CometRewards__factory.createInterface().encodeFunctionData('claim', [
-            market.cometAddress,
-            owner,
-            true,
-        ]);
+        let data;
+        if (owner === account) {
+            const userAgent = core.calcAccountAgent(this.chainId, account);
+            data = contracts_1.CometRewards__factory.createInterface().encodeFunctionData('claimTo', [
+                market.cometAddress,
+                owner,
+                userAgent,
+                true,
+            ]);
+        }
+        else {
+            data = contracts_1.CometRewards__factory.createInterface().encodeFunctionData('claim', [market.cometAddress, owner, true]);
+        }
         return core.newLogic({ to, data });
     }
 };

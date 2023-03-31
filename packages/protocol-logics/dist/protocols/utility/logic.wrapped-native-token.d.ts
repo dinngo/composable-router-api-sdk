@@ -13,6 +13,7 @@ export declare class WrappedNativeTokenLogic extends core.Logic implements core.
         to: string;
         data: string;
         inputs: core.IParam.InputStruct[];
+        wrapMode: number;
         approveTo: string;
         callback: string;
     }>;

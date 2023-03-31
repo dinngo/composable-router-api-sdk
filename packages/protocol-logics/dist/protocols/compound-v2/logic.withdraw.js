@@ -23,9 +23,7 @@ let WithdrawLogic = class WithdrawLogic extends core.Logic {
         const { input, amountBps } = fields;
         const to = input.token.address;
         const data = contracts_1.CErc20__factory.createInterface().encodeFunctionData('redeem', [input.amountWei]);
-        let amountOffset;
-        if (amountBps)
-            amountOffset = common.getParamOffset(0);
+        const amountOffset = amountBps ? common.getParamOffset(0) : undefined;
         const inputs = [core.newLogicInput({ input, amountBps, amountOffset })];
         return core.newLogic({ to, data, inputs });
     }

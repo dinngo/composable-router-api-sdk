@@ -13,6 +13,7 @@ export declare class SupplyLogic extends core.Logic implements core.LogicTokenLi
         to: string;
         data: string;
         inputs: core.IParam.InputStruct[];
+        wrapMode: number;
         approveTo: string;
         callback: string;
     }>;

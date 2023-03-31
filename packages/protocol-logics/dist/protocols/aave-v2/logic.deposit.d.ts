@@ -7,7 +7,7 @@ export type DepositLogicFields = core.TokenToTokenExactInFields<{
 export type DepositLogicOptions = Pick<core.GlobalOptions, 'account'>;
 export declare class DepositLogic extends core.Logic implements core.LogicTokenListInterface, core.LogicOracleInterface {
     static readonly supportedChainIds: common.ChainId[];
-    getTokenList(): Promise<common.Token[][]>;
+    getTokenList(): Promise<[common.Token, common.Token][]>;
     quote(params: DepositLogicParams): Promise<{
         input: common.TokenAmount;
         output: common.TokenAmount;
@@ -16,6 +16,7 @@ export declare class DepositLogic extends core.Logic implements core.LogicTokenL
         to: string;
         data: string;
         inputs: core.IParam.InputStruct[];
+        wrapMode: number;
         approveTo: string;
         callback: string;
     }>;

@@ -15,8 +15,11 @@ async function default_1() {
         for (const market of markets) {
             const { cToken, baseToken } = await service.getCometTokens(market.id);
             tokenMap[cToken.symbol] = cToken;
-            const unwrappedBaseToken = baseToken.unwrapped;
-            tokenMap[unwrappedBaseToken.symbol] = unwrappedBaseToken;
+            tokenMap[baseToken.symbol] = baseToken;
+            if (baseToken.isWrapped) {
+                const unwrappedBaseToken = baseToken.unwrapped;
+                tokenMap[unwrappedBaseToken.symbol] = unwrappedBaseToken;
+            }
             const collaterals = await service.getCollaterals(market.id);
             for (const collateral of collaterals) {
                 tokenMap[collateral.symbol] = collateral;

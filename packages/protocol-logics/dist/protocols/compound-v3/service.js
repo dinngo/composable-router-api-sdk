@@ -35,7 +35,10 @@ class Service extends common.Web3Toolkit {
         const collateralAddresses = [];
         for (let i = 0; i < numAssets; i++) {
             const [{ asset }] = ifaceComet.decodeFunctionResult('getAssetInfo', returnData[i]);
-            collateralAddresses.push(common.Token.isWrapped(this.chainId, asset) ? this.nativeToken.address : asset);
+            if (asset === this.wrappedNativeToken.address) {
+                collateralAddresses.push(this.nativeToken.address);
+            }
+            collateralAddresses.push(asset);
         }
         const collaterals = await this.getTokens(collateralAddresses);
         return collaterals;
@@ -78,6 +81,25 @@ class Service extends common.Web3Toolkit {
         const contractCometRewards = contracts_1.CometRewards__factory.connect((0, config_1.getContractAddress)(this.chainId, 'CometRewards'), this.provider);
         const { owed } = await contractCometRewards.callStatic.getRewardOwed(market.cometAddress, owner);
         return new common.TokenAmount((0, tokens_1.COMP)(this.chainId)).setWei(owed);
+    }
+    async canSupply(marketId, supply) {
+        const market = (0, config_1.getMarket)(this.chainId, marketId);
+        const asset = supply.token.wrapped.address;
+        const ifaceComet = contracts_1.Comet__factory.createInterface();
+        const calls = [
+            {
+                target: market.cometAddress,
+                callData: ifaceComet.encodeFunctionData('getAssetInfoByAddress', [asset]),
+            },
+            {
+                target: market.cometAddress,
+                callData: ifaceComet.encodeFunctionData('totalsCollateral', [asset]),
+            },
+        ];
+        const { returnData } = await this.multicall2.callStatic.aggregate(calls);
+        const [{ supplyCap }] = ifaceComet.decodeFunctionResult('getAssetInfoByAddress', returnData[0]);
+        const [totalSupplyAsset] = ifaceComet.decodeFunctionResult('totalsCollateral', returnData[1]);
+        return supplyCap.gt(totalSupplyAsset.add(supply.amountWei));
     }
 }
 exports.Service = Service;

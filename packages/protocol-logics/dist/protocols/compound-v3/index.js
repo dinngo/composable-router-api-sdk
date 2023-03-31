@@ -12,5 +12,4 @@ tslib_1.__exportStar(require("./logic.withdraw-base"), exports);
 tslib_1.__exportStar(require("./logic.withdraw-collateral"), exports);
 tslib_1.__exportStar(require("./service"), exports);
 tslib_1.__exportStar(require("./tokens"), exports);
-tslib_1.__exportStar(require("./utils"), exports);
 //# sourceMappingURL=index.js.map

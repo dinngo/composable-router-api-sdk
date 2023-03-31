@@ -42,6 +42,7 @@ export declare class SwapTokenLogic extends core.Logic implements core.LogicToke
         to: string;
         data: string;
         inputs: core.IParam.InputStruct[];
+        wrapMode: number;
         approveTo: string;
         callback: string;
     }>;
