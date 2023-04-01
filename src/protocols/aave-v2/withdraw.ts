@@ -1,11 +1,13 @@
-import { LogicFormData, ToObjectFields } from 'src/types';
-import { protocols } from '@composable-router/logics';
+import { Declasifying, LogicFormData } from 'src/types';
+import * as logics from '@composable-router/logics';
 import { v4 as uuidv4 } from 'uuid';
 
-export type WithdrawFields = ToObjectFields<protocols.aavev2.WithdrawLogicFields>;
+export type WithdrawParams = Declasifying<logics.aavev2.WithdrawLogicParams>;
+
+export type WithdrawFields = Declasifying<logics.aavev2.WithdrawLogicFields>;
 
 export type WithdrawFormData = LogicFormData<WithdrawFields>;
 
 export function newWithdrawFormData(fields: WithdrawFields): WithdrawFormData {
-  return { id: uuidv4(), rid: protocols.aavev2.WithdrawLogic.rid, fields };
+  return { id: uuidv4(), rid: logics.aavev2.WithdrawLogic.rid, fields };
 }

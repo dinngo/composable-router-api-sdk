@@ -1,11 +1,13 @@
-import { LogicFormData, ToObjectFields } from 'src/types';
-import { protocols } from '@composable-router/logics';
+import { Declasifying, LogicFormData } from 'src/types';
+import * as logics from '@composable-router/logics';
 import { v4 as uuidv4 } from 'uuid';
 
-export type SupplyFields = ToObjectFields<protocols.aavev3.SupplyLogicFields>;
+export type SupplyParams = Declasifying<logics.aavev3.SupplyLogicParams>;
+
+export type SupplyFields = Declasifying<logics.aavev3.SupplyLogicFields>;
 
 export type SupplyFormData = LogicFormData<SupplyFields>;
 
 export function newSupplyFormData(fields: SupplyFields): SupplyFormData {
-  return { id: uuidv4(), rid: protocols.aavev3.SupplyLogic.rid, fields };
+  return { id: uuidv4(), rid: logics.aavev3.SupplyLogic.rid, fields };
 }

@@ -2,23 +2,23 @@ import { PermitBatchData, PermitSingleData } from '@uniswap/permit2-sdk';
 import { TokensOutFields } from '@composable-router/core';
 import * as common from '@composable-router/common';
 
-export type ToObjectFields<T> = {
-  [K in keyof T]: T[K] extends common.Token
-    ? common.TokenObject
-    : T[K] extends common.TokenAmount
-    ? common.TokenAmountObject
-    : T[K] extends common.TokenAmounts
-    ? common.TokenAmountObject[]
-    : T[K];
-};
-
-export type ToFields<T> = {
+export type Classifying<T> = {
   [K in keyof T]: T[K] extends common.TokenObject
     ? common.Token
     : T[K] extends common.TokenAmountObject
     ? common.TokenAmount
     : T[K] extends common.TokenAmountObject[]
     ? common.TokenAmounts
+    : T[K];
+};
+
+export type Declasifying<T> = {
+  [K in keyof T]: T[K] extends common.Token
+    ? common.TokenObject
+    : T[K] extends common.TokenAmount
+    ? common.TokenAmountObject
+    : T[K] extends common.TokenAmounts
+    ? common.TokenAmountObject[]
     : T[K];
 };
 
@@ -47,6 +47,6 @@ export interface RouterFormDataEstimateResult {
 
 export type FlashLoanLogicFields = TokensOutFields<{ id: string; isLoan: boolean }>;
 
-export type FlashLoanFields = ToObjectFields<FlashLoanLogicFields>;
+export type FlashLoanFields = Declasifying<FlashLoanLogicFields>;
 
 export type FlashLoanFormData = LogicFormData<FlashLoanFields>;

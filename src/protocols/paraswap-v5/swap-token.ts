@@ -1,11 +1,13 @@
-import { LogicFormData, ToObjectFields } from 'src/types';
-import { protocols } from '@composable-router/logics';
+import { Declasifying, LogicFormData } from 'src/types';
+import * as logics from '@composable-router/logics';
 import { v4 as uuidv4 } from 'uuid';
 
-export type SwapTokenFields = ToObjectFields<protocols.paraswapv5.SwapTokenLogicFields>;
+export type SwapTokenParams = Declasifying<logics.paraswapv5.SwapTokenLogicParams>;
+
+export type SwapTokenFields = Declasifying<logics.paraswapv5.SwapTokenLogicFields>;
 
 export type SwapTokenFormData = LogicFormData<SwapTokenFields>;
 
 export function newSwapTokenFormData(fields: SwapTokenFields): SwapTokenFormData {
-  return { id: uuidv4(), rid: protocols.paraswapv5.SwapTokenLogic.rid, fields };
+  return { id: uuidv4(), rid: logics.paraswapv5.SwapTokenLogic.rid, fields };
 }

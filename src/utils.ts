@@ -1,6 +1,7 @@
+import { Classifying } from './types';
 import * as common from '@composable-router/common';
 
-export function toFields<T>(fields: any) {
+export function classifying<T extends Record<string, any> = any>(fields: T): Classifying<T> {
   const transformed: Record<string, any> = {};
   Object.keys(fields).forEach((key) => {
     const value = fields[key];
@@ -13,5 +14,5 @@ export function toFields<T>(fields: any) {
       : value;
   });
 
-  return transformed as T;
+  return transformed as Classifying<T>;
 }
