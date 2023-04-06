@@ -3,6 +3,7 @@ import * as core from '@composable-router/core';
 export type FlashLoanLogicFields = core.FlashLoanFields;
 export declare class FlashLoanLogic extends core.Logic {
     static readonly supportedChainIds: common.ChainId[];
+    getTokenList(): Promise<common.TokenTypes[]>;
     build(fields: FlashLoanLogicFields): Promise<{
         to: string;
         data: string;

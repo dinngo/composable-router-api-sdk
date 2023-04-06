@@ -13,6 +13,28 @@ let SwapTokenLogic = class SwapTokenLogic extends core.Logic {
     get sdk() {
         return (0, sdk_1.constructSimpleSDK)({ chainId: this.chainId, axios: axios_1.default });
     }
+    async getTokenList() {
+        const tokenListUrls = config_1.tokenListUrlsMap[this.chainId];
+        const tokenLists = await Promise.all(tokenListUrls.map((tokenListUrl) => axios_1.default.get(tokenListUrl)));
+        const tmp = { [this.nativeToken.address]: true };
+        const tokenList = [this.nativeToken];
+        for (const { data } of tokenLists) {
+            for (const token of data.tokens) {
+                if (tmp[token.address] || token.chainId !== this.chainId || !token.name || !token.symbol || !token.decimals) {
+                    continue;
+                }
+                tokenList.push({
+                    chainId: token.chainId,
+                    address: token.address,
+                    decimals: token.decimals,
+                    symbol: token.symbol,
+                    name: token.name,
+                });
+                tmp[token.address] = true;
+            }
+        }
+        return tokenList;
+    }
     async quote(params) {
         const { input, tokenOut } = params;
         const { destAmount } = await this.sdk.swap.getRate({
