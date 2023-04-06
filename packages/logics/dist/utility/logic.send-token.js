@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SendTokenLogic = void 0;
 const tslib_1 = require("tslib");
+const ethers_1 = require("ethers");
 const axios_1 = tslib_1.__importDefault(require("axios"));
 const axios_retry_1 = tslib_1.__importDefault(require("axios-retry"));
 const common = tslib_1.__importStar(require("@composable-router/common"));
 const core = tslib_1.__importStar(require("@composable-router/core"));
-const ethers_1 = require("ethers");
 (0, axios_retry_1.default)(axios_1.default, { retries: 5, retryDelay: axios_retry_1.default.exponentialDelay });
 let SendTokenLogic = class SendTokenLogic extends core.Logic {
     async getTokenList() {
@@ -24,12 +24,22 @@ let SendTokenLogic = class SendTokenLogic extends core.Logic {
     }
     async build(fields) {
         const { input, recipient, amountBps } = fields;
-        const to = input.token.address;
-        const data = common.ERC20__factory.createInterface().encodeFunctionData('transfer', [recipient, input.amountWei]);
-        const inputs = [];
-        if (amountBps) {
-            inputs.push(core.newLogicInput({ input, amountBps, amountOffset: common.getParamOffset(1) }));
+        let to;
+        let data;
+        let amountOffset;
+        if (input.token.isNative) {
+            to = recipient;
+            data = '0x';
+            if (amountBps)
+                amountOffset = ethers_1.constants.MaxUint256;
         }
+        else {
+            to = input.token.address;
+            data = common.ERC20__factory.createInterface().encodeFunctionData('transfer', [recipient, input.amountWei]);
+            if (amountBps)
+                amountOffset = common.getParamOffset(1);
+        }
+        const inputs = [core.newLogicInput({ input, amountBps, amountOffset })];
         return core.newLogic({ to, data, inputs });
     }
 };

@@ -4,6 +4,7 @@ import * as common from '@composable-router/common';
 import * as core from '@composable-router/core';
 import { expect } from 'chai';
 import { mainnetTokens } from '@composable-router/test-helpers';
+import * as protocols from './protocols';
 
 describe('Test classifying', function () {
   it('TokenToTokenExactInFields', function () {
@@ -35,5 +36,17 @@ describe('Test classifying', function () {
     };
     const fields = classifying(fieldsObject);
     expect(common.isTokenAmounts(fields.inputs)).to.be.true;
+  });
+
+  it('MultiSendFields', function () {
+    const fieldsObject: protocols.utility.MultiSendFields = [
+      { input: { token: mainnetTokens.ETH, amount: '1' }, recipient: '0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa' },
+      { input: { token: mainnetTokens.WETH, amount: '1' }, recipient: '0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa' },
+      { input: { token: mainnetTokens.USDC, amount: '1' }, recipient: '0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa' },
+    ];
+    const fields = classifying(fieldsObject);
+    for (const item of fields) {
+      expect(common.isTokenAmount(item.input)).to.be.true;
+    }
   });
 });
