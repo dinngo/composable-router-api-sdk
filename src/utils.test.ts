@@ -1,9 +1,9 @@
 import { Declasifying } from './types';
 import { classifying } from './utils';
-import * as common from '@composable-router/common';
-import * as core from '@composable-router/core';
+import * as common from '@furucombo/composable-router-common';
+import * as core from '@furucombo/composable-router-core';
 import { expect } from 'chai';
-import { mainnetTokens } from '@composable-router/test-helpers';
+import { mainnetTokens } from '@furucombo/composable-router-test-helpers';
 import * as protocols from './protocols';
 
 describe('Test classifying', function () {

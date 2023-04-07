@@ -1,5 +1,5 @@
 import { Declasifying, LogicFormData } from 'src/types';
-import * as core from '@composable-router/core';
+import * as core from '@furucombo/composable-router-core';
 import { v4 as uuidv4 } from 'uuid';
 
 export const MULTI_SEND_RID = 'utility:multi-send';

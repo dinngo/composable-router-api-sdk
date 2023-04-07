@@ -1,6 +1,6 @@
 import { PermitBatchData, PermitSingleData } from '@uniswap/permit2-sdk';
-import { TokensOutFields } from '@composable-router/core';
-import * as common from '@composable-router/common';
+import { TokensOutFields } from '@furucombo/composable-router-core';
+import * as common from '@furucombo/composable-router-common';
 
 export type Classifying<T> = T extends Array<infer U>
   ? U extends undefined

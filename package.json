@@ -1,11 +1,12 @@
 {
-  "name": "@composable-router/api-sdk",
+  "name": "@furucombo/composable-router-api",
   "version": "0.1.0",
   "description": "Composable Router API SDK",
   "keywords": [
+    "furucombo",
     "composable-router"
   ],
-  "repository": "https://github.com/dinngodev/router-api-sdk.git",
+  "repository": "https://github.com/dinngo/composable-router-api-sdk.git",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,6 +23,9 @@
     "test:unit": "mocha --recursive src"
   },
   "dependencies": {
+    "@furucombo/composable-router-common": "^0.1.0",
+    "@furucombo/composable-router-core": "^0.1.0",
+    "@furucombo/composable-router-logics": "^0.1.0",
     "@types/lodash": "^4.14.191",
     "@types/uuid": "^9.0.1",
     "@uniswap/permit2-sdk": "^1.2.0",
@@ -35,10 +39,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@composable-router/common": "file:./packages/common",
-    "@composable-router/core": "file:./packages/core",
-    "@composable-router/logics": "file:./packages/logics",
-    "@composable-router/test-helpers": "file:./packages/test-helpers",
+    "@furucombo/composable-router-test-helpers": "^0.1.0",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
     "@nomiclabs/hardhat-ethers": "^2.2.2",

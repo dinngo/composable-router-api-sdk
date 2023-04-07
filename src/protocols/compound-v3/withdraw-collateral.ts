@@ -1,5 +1,5 @@
 import { Declasifying, LogicFormData } from 'src/types';
-import * as logics from '@composable-router/logics';
+import * as logics from '@furucombo/composable-router-logics';
 import { v4 as uuidv4 } from 'uuid';
 
 export type WithdrawCollateralFields = Declasifying<logics.compoundv3.WithdrawCollateralLogicFields>;

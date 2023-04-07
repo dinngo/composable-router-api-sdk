@@ -1,5 +1,5 @@
 import { Classifying } from './types';
-import * as common from '@composable-router/common';
+import * as common from '@furucombo/composable-router-common';
 
 export function classifying<T extends Record<string, any> | any[] = any>(fields: T): Classifying<T> {
   if (Array.isArray(fields)) {
