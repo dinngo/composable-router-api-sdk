@@ -16,7 +16,7 @@ describe('AaveV2 RepayLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases = [
+    const testCases: logics.aavev2.RepayLogicParams[] = [
       {
         borrower: '0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa',
         interestRateMode: logics.aavev2.InterestRateMode.variable,

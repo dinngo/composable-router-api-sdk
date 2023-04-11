@@ -17,7 +17,7 @@ describe('Utility WrappedNativeTokenLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases = [
+    const testCases: logics.utility.WrappedNativeTokenLogicParams[] = [
       { input: new common.TokenAmount(mainnetTokens.ETH, '1'), tokenOut: mainnetTokens.WETH },
       { input: new common.TokenAmount(mainnetTokens.WETH, '1'), tokenOut: mainnetTokens.ETH },
     ];

@@ -17,7 +17,7 @@ describe('ParaswapV5 SwapTokenLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases = [
+    const testCases: logics.paraswapv5.SwapTokenLogicParams[] = [
       { input: new common.TokenAmount(mainnetTokens.ETH, '1'), tokenOut: mainnetTokens.USDC },
       { input: new common.TokenAmount(mainnetTokens.USDC, '1'), tokenOut: mainnetTokens.ETH },
       { input: new common.TokenAmount(mainnetTokens.USDC, '1'), tokenOut: mainnetTokens.DAI },

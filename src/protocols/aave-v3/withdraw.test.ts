@@ -16,7 +16,7 @@ describe('AaveV3 WithdrawLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases = [
+    const testCases: logics.aavev3.WithdrawLogicParams[] = [
       {
         input: new common.TokenAmount(logics.aavev3.mainnetTokens.aEthWETH, '1'),
         tokenOut: logics.aavev3.mainnetTokens.ETH,
