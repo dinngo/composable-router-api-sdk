@@ -19,13 +19,12 @@
     "lint": "eslint --fix src",
     "prepublishOnly": "yarn build",
     "test": "mocha",
-    "test:e2e": "hardhat test",
     "test:unit": "mocha --recursive src"
   },
   "dependencies": {
-    "@furucombo/composable-router-common": "^0.1.0",
-    "@furucombo/composable-router-core": "^0.1.0",
-    "@furucombo/composable-router-logics": "^0.1.0",
+    "@furucombo/composable-router-common": "^0.1.2",
+    "@furucombo/composable-router-core": "^0.1.2",
+    "@furucombo/composable-router-logics": "^0.1.2",
     "@types/lodash": "^4.14.191",
     "@types/uuid": "^9.0.1",
     "@uniswap/permit2-sdk": "^1.2.0",
@@ -39,11 +38,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@furucombo/composable-router-test-helpers": "^0.1.0",
-    "@nomicfoundation/hardhat-chai-matchers": "^1.0.6",
-    "@nomicfoundation/hardhat-network-helpers": "^1.0.8",
-    "@nomiclabs/hardhat-ethers": "^2.2.2",
-    "@typechain/ethers-v5": "^10.2.0",
+    "@changesets/cli": "^2.26.1",
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
     "@types/node": "^16.18.11",
@@ -54,7 +49,6 @@
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "hardhat": "^2.12.7",
     "mocha": "^10.2.0",
     "prettier": "^2.8.4",
     "pretty-quick": "^3.1.3",

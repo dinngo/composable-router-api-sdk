@@ -27,7 +27,7 @@
       "test/*": ["test/*"]
     }
   },
-  "include": ["src/**/*", "test/**/*", "hardhat.config.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules/**/*", "dist/**/*"],
   "ts-node": {
     "require": ["tsconfig-paths/register"]
