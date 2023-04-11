@@ -1,15 +1,16 @@
 import { Declasifying, LogicFormData } from 'src/types';
-import * as core from '@furucombo/composable-router-core';
+import { getProtocolTokenList } from 'src/api';
+import * as logics from '@furucombo/composable-router-logics';
 import { v4 as uuidv4 } from 'uuid';
 
-export const MULTI_SEND_RID = 'utility:multi-send';
-
-export type MultiSendLogicFields = core.TokenToUserFields[];
-
-export type MultiSendFields = Declasifying<MultiSendLogicFields>;
+export type MultiSendFields = Declasifying<logics.utility.MultiSendLogicFields>;
 
 export type MultiSendFormData = LogicFormData<MultiSendFields>;
 
 export function newMultiSendFormData(fields: MultiSendFields): MultiSendFormData {
-  return { id: uuidv4(), rid: MULTI_SEND_RID, fields };
+  return { id: uuidv4(), rid: logics.utility.MultiSendLogic.rid, fields };
+}
+
+export async function getMultiSendTokenList(chainId: number): Promise<logics.utility.MultiSendLogicTokenList> {
+  return getProtocolTokenList(chainId, logics.utility.MultiSendLogic.rid);
 }
