@@ -1,5 +1,11 @@
 # @furucombo/composable-router-api
 
+## 0.1.2
+
+### Patch Changes
+
+- 35ee1ca: fix not exporting api.ts issue
+
 ## 0.1.1
 
 ### Patch Changes
