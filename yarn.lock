@@ -668,10 +668,10 @@
     ethers "^5.7.2"
     tiny-invariant "^1.3.1"
 
-"@furucombo/composable-router-logics@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@furucombo/composable-router-logics/-/composable-router-logics-0.1.5.tgz#508950e6155ef8654ba4f466e207a8b23d25e7cb"
-  integrity sha512-n7Edszj4pM0QcnydMz8lpUQ3MSlhv2wbbMOp+tmQUiOmLKIw8bWq7kvvp87FovhxS7pUibQZOzMuTD8THAmCsQ==
+"@furucombo/composable-router-logics@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@furucombo/composable-router-logics/-/composable-router-logics-0.1.6.tgz#ad43765aa9ffe3eeebd80b48354babdc79b1135b"
+  integrity sha512-7t18SiGSW2L5B4oP4SD59X+ikCxVnDtJ6Ja4cx+MAPwIZmUc31fg9Nig5P6g/gG1my6nkw4qz2+nxPOCF3BQfA==
   dependencies:
     "@changesets/cli" "^2.26.1"
     "@furucombo/composable-router-common" "^0.1.3"

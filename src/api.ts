@@ -22,7 +22,7 @@ export async function quote(chainId: number, rid: string, data: any) {
 
 export async function estimateRouterFormData(routerFormData: RouterFormData): Promise<RouterFormDataEstimateResult> {
   const resp = await client.post('/v1/transactions?isEstimate=true', routerFormData);
-  return resp.data;
+  return classifying(resp.data);
 }
 
 export async function buildRouterTransactionRequest(
