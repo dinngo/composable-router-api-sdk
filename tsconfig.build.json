@@ -5,5 +5,5 @@
     "declarationDir": "dist",
     "rootDir": "src"
   },
-  "exclude": ["**/*.test.ts"]
+  "exclude": ["**/*.test.ts", "examples/**/*"]
 }
