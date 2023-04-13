@@ -1,5 +1,11 @@
 # @furucombo/composable-router-api
 
+## 0.1.4
+
+### Patch Changes
+
+- 739a26d: update get quotation params to declasifyied type
+
 ## 0.1.3
 
 ### Patch Changes
