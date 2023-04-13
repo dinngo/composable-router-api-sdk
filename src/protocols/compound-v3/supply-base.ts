@@ -19,7 +19,7 @@ export async function getSupplyBaseTokenList(chainId: number): Promise<logics.co
 
 export async function getSupplyBaseQuotation(
   chainId: number,
-  params: logics.compoundv3.SupplyBaseLogicParams
+  params: SupplyBaseParams
 ): Promise<logics.compoundv3.SupplyBaseLogicFields> {
   return quote(chainId, logics.compoundv3.SupplyBaseLogic.rid, params);
 }

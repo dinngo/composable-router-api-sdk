@@ -19,7 +19,7 @@ export async function getDepositTokenList(chainId: number): Promise<logics.aavev
 
 export async function getDepositQuotation(
   chainId: number,
-  params: logics.aavev2.DepositLogicParams
+  params: DepositParams
 ): Promise<logics.aavev2.DepositLogicFields> {
   return quote(chainId, logics.aavev2.DepositLogic.rid, params);
 }

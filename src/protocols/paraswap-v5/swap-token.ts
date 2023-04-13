@@ -19,7 +19,7 @@ export async function getSwapTokenTokenList(chainId: number): Promise<logics.par
 
 export async function getSwapTokenQuotation(
   chainId: number,
-  params: logics.paraswapv5.SwapTokenLogicParams
+  params: SwapTokenParams
 ): Promise<logics.paraswapv5.SwapTokenLogicFields> {
   return quote(chainId, logics.paraswapv5.SwapTokenLogic.rid, params);
 }

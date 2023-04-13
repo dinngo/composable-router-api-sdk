@@ -19,7 +19,7 @@ export async function getRepayTokenList(chainId: number): Promise<logics.compoun
 
 export async function getRepayQuotation(
   chainId: number,
-  params: logics.compoundv3.RepayLogicParams
+  params: RepayParams
 ): Promise<logics.compoundv3.RepayLogicFields> {
   return quote(chainId, logics.compoundv3.RepayLogic.rid, params);
 }

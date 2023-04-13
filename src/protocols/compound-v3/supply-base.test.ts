@@ -1,6 +1,6 @@
+import { SupplyBaseParams, getSupplyBaseQuotation, getSupplyBaseTokenList } from './supply-base';
 import * as common from '@furucombo/composable-router-common';
 import { expect } from 'chai';
-import { getSupplyBaseQuotation, getSupplyBaseTokenList } from './supply-base';
 import * as logics from '@furucombo/composable-router-logics';
 
 describe('CompoundV3 SupplyBaseLogic', function () {
@@ -20,20 +20,20 @@ describe('CompoundV3 SupplyBaseLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases: logics.compoundv3.SupplyBaseLogicParams[] = [
+    const testCases: SupplyBaseParams[] = [
       {
         marketId: logics.compoundv3.MarketId.USDC,
-        input: new common.TokenAmount(logics.compoundv3.mainnetTokens.USDC, '1'),
+        input: { token: logics.compoundv3.mainnetTokens.USDC, amount: '1' },
         tokenOut: logics.compoundv3.mainnetTokens.cUSDCv3,
       },
       {
         marketId: logics.compoundv3.MarketId.ETH,
-        input: new common.TokenAmount(logics.compoundv3.mainnetTokens.ETH, '1'),
+        input: { token: logics.compoundv3.mainnetTokens.ETH, amount: '1' },
         tokenOut: logics.compoundv3.mainnetTokens.cWETHv3,
       },
       {
         marketId: logics.compoundv3.MarketId.ETH,
-        input: new common.TokenAmount(logics.compoundv3.mainnetTokens.WETH, '1'),
+        input: { token: logics.compoundv3.mainnetTokens.WETH, amount: '1' },
         tokenOut: logics.compoundv3.mainnetTokens.cWETHv3,
       },
     ];

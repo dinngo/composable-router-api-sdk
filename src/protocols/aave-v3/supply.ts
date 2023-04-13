@@ -19,7 +19,7 @@ export async function getSupplyTokenList(chainId: number): Promise<logics.aavev3
 
 export async function getSupplyQuotation(
   chainId: number,
-  params: logics.aavev3.SupplyLogicParams
+  params: SupplyParams
 ): Promise<logics.aavev3.SupplyLogicFields> {
   return quote(chainId, logics.aavev3.SupplyLogic.rid, params);
 }

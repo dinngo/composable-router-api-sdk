@@ -21,7 +21,7 @@ export async function getWrappedNativeTokenTokenList(
 
 export async function getWrappedNativeTokenQuotation(
   chainId: number,
-  params: logics.utility.WrappedNativeTokenLogicParams
+  params: WrappedNativeTokenParams
 ): Promise<logics.utility.WrappedNativeTokenLogicFields> {
   return quote(chainId, logics.utility.WrappedNativeTokenLogic.rid, params);
 }

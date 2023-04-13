@@ -19,7 +19,7 @@ export async function getClaimTokenList(chainId: number): Promise<logics.compoun
 
 export async function getClaimQuotation(
   chainId: number,
-  params: logics.compoundv3.ClaimLogicParams
+  params: ClaimParams
 ): Promise<logics.compoundv3.ClaimLogicFields> {
   return quote(chainId, logics.compoundv3.ClaimLogic.rid, params);
 }

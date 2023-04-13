@@ -1,6 +1,6 @@
+import { DepositParams, getDepositQuotation, getDepositTokenList } from './deposit';
 import * as common from '@furucombo/composable-router-common';
 import { expect } from 'chai';
-import { getDepositQuotation, getDepositTokenList } from './deposit';
 import * as logics from '@furucombo/composable-router-logics';
 
 describe('AaveV2 DepositLogic', function () {
@@ -16,13 +16,13 @@ describe('AaveV2 DepositLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases: logics.aavev2.DepositLogicParams[] = [
+    const testCases: DepositParams[] = [
       {
-        input: new common.TokenAmount(logics.aavev2.mainnetTokens.ETH, '1'),
+        input: { token: logics.aavev2.mainnetTokens.ETH, amount: '1' },
         tokenOut: logics.aavev2.mainnetTokens.aWETH,
       },
       {
-        input: new common.TokenAmount(logics.aavev2.mainnetTokens.USDC, '1'),
+        input: { token: logics.aavev2.mainnetTokens.USDC, amount: '1' },
         tokenOut: logics.aavev2.mainnetTokens.aUSDC,
       },
     ];

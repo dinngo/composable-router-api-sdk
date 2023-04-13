@@ -1,6 +1,6 @@
+import { RepayParams, getRepayQuotation, getRepayTokenList } from './repay';
 import * as common from '@furucombo/composable-router-common';
 import { expect } from 'chai';
-import { getRepayQuotation, getRepayTokenList } from './repay';
 import * as logics from '@furucombo/composable-router-logics';
 
 describe('AaveV2 RepayLogic', function () {
@@ -16,7 +16,7 @@ describe('AaveV2 RepayLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases: logics.aavev2.RepayLogicParams[] = [
+    const testCases: RepayParams[] = [
       {
         borrower: '0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa',
         interestRateMode: logics.aavev2.InterestRateMode.variable,

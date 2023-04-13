@@ -1,6 +1,6 @@
+import { ClaimParams, getClaimQuotation, getClaimTokenList } from './claim';
 import * as common from '@furucombo/composable-router-common';
 import { expect } from 'chai';
-import { getClaimQuotation, getClaimTokenList } from './claim';
 import * as logics from '@furucombo/composable-router-logics';
 
 describe('CompoundV3 ClaimLogic', function () {
@@ -16,7 +16,7 @@ describe('CompoundV3 ClaimLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases: logics.compoundv3.ClaimLogicParams[] = [
+    const testCases: ClaimParams[] = [
       {
         marketId: logics.compoundv3.MarketId.USDC,
         owner: '0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa',

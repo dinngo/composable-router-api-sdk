@@ -1,6 +1,6 @@
+import { WithdrawParams, getWithdrawQuotation, getWithdrawTokenList } from './withdraw';
 import * as common from '@furucombo/composable-router-common';
 import { expect } from 'chai';
-import { getWithdrawQuotation, getWithdrawTokenList } from './withdraw';
 import * as logics from '@furucombo/composable-router-logics';
 
 describe('AaveV3 WithdrawLogic', function () {
@@ -16,13 +16,13 @@ describe('AaveV3 WithdrawLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases: logics.aavev3.WithdrawLogicParams[] = [
+    const testCases: WithdrawParams[] = [
       {
-        input: new common.TokenAmount(logics.aavev3.mainnetTokens.aEthWETH, '1'),
+        input: { token: logics.aavev3.mainnetTokens.aEthWETH, amount: '1' },
         tokenOut: logics.aavev3.mainnetTokens.ETH,
       },
       {
-        input: new common.TokenAmount(logics.aavev3.mainnetTokens.aEthUSDC, '1'),
+        input: { token: logics.aavev3.mainnetTokens.aEthUSDC, amount: '1' },
         tokenOut: logics.aavev3.mainnetTokens.USDC,
       },
     ];

@@ -17,9 +17,6 @@ export async function getRepayTokenList(chainId: number): Promise<logics.aavev3.
   return getProtocolTokenList(chainId, logics.aavev3.RepayLogic.rid);
 }
 
-export async function getRepayQuotation(
-  chainId: number,
-  params: logics.aavev3.RepayLogicParams
-): Promise<logics.aavev3.RepayLogicFields> {
+export async function getRepayQuotation(chainId: number, params: RepayParams): Promise<logics.aavev3.RepayLogicFields> {
   return quote(chainId, logics.aavev3.RepayLogic.rid, params);
 }

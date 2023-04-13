@@ -19,7 +19,7 @@ export async function getWithdrawTokenList(chainId: number): Promise<logics.aave
 
 export async function getWithdrawQuotation(
   chainId: number,
-  params: logics.aavev3.WithdrawLogicParams
+  params: WithdrawParams
 ): Promise<logics.aavev3.WithdrawLogicFields> {
   return quote(chainId, logics.aavev3.WithdrawLogic.rid, params);
 }

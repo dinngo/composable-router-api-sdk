@@ -1,6 +1,10 @@
+import {
+  WrappedNativeTokenParams,
+  getWrappedNativeTokenQuotation,
+  getWrappedNativeTokenTokenList,
+} from './wrapped-native-token';
 import * as common from '@furucombo/composable-router-common';
 import { expect } from 'chai';
-import { getWrappedNativeTokenQuotation, getWrappedNativeTokenTokenList } from './wrapped-native-token';
 import * as logics from '@furucombo/composable-router-logics';
 import { mainnetTokens } from '@furucombo/composable-router-test-helpers';
 
@@ -17,9 +21,15 @@ describe('Utility WrappedNativeTokenLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases: logics.utility.WrappedNativeTokenLogicParams[] = [
-      { input: new common.TokenAmount(mainnetTokens.ETH, '1'), tokenOut: mainnetTokens.WETH },
-      { input: new common.TokenAmount(mainnetTokens.WETH, '1'), tokenOut: mainnetTokens.ETH },
+    const testCases: WrappedNativeTokenParams[] = [
+      {
+        input: { token: mainnetTokens.ETH, amount: '1' },
+        tokenOut: mainnetTokens.WETH,
+      },
+      {
+        input: { token: mainnetTokens.WETH, amount: '1' },
+        tokenOut: mainnetTokens.ETH,
+      },
     ];
 
     testCases.forEach((params, i) => {

@@ -1,6 +1,6 @@
+import { WithdrawBaseParams, getWithdrawBaseQuotation, getWithdrawBaseTokenList } from './withdraw-base';
 import * as common from '@furucombo/composable-router-common';
 import { expect } from 'chai';
-import { getWithdrawBaseQuotation, getWithdrawBaseTokenList } from './withdraw-base';
 import * as logics from '@furucombo/composable-router-logics';
 
 describe('CompoundV3 WithdrawBaseLogic', function () {
@@ -20,20 +20,20 @@ describe('CompoundV3 WithdrawBaseLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases: logics.compoundv3.WithdrawBaseLogicParams[] = [
+    const testCases: WithdrawBaseParams[] = [
       {
         marketId: logics.compoundv3.MarketId.USDC,
-        input: new common.TokenAmount(logics.compoundv3.mainnetTokens.cUSDCv3, '1'),
+        input: { token: logics.compoundv3.mainnetTokens.cUSDCv3, amount: '1' },
         tokenOut: logics.compoundv3.mainnetTokens.USDC,
       },
       {
         marketId: logics.compoundv3.MarketId.ETH,
-        input: new common.TokenAmount(logics.compoundv3.mainnetTokens.cWETHv3, '1'),
+        input: { token: logics.compoundv3.mainnetTokens.cWETHv3, amount: '1' },
         tokenOut: logics.compoundv3.mainnetTokens.ETH,
       },
       {
         marketId: logics.compoundv3.MarketId.ETH,
-        input: new common.TokenAmount(logics.compoundv3.mainnetTokens.cWETHv3, '1'),
+        input: { token: logics.compoundv3.mainnetTokens.cWETHv3, amount: '1' },
         tokenOut: logics.compoundv3.mainnetTokens.WETH,
       },
     ];

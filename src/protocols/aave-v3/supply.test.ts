@@ -1,6 +1,6 @@
+import { SupplyParams, getSupplyQuotation, getSupplyTokenList } from './supply';
 import * as common from '@furucombo/composable-router-common';
 import { expect } from 'chai';
-import { getSupplyQuotation, getSupplyTokenList } from './supply';
 import * as logics from '@furucombo/composable-router-logics';
 
 describe('AaveV3 SupplyLogic', function () {
@@ -16,13 +16,13 @@ describe('AaveV3 SupplyLogic', function () {
   context('Test getQuotation', async function () {
     const chainId = common.ChainId.mainnet;
 
-    const testCases: logics.aavev3.SupplyLogicParams[] = [
+    const testCases: SupplyParams[] = [
       {
-        input: new common.TokenAmount(logics.aavev3.mainnetTokens.ETH, '1'),
+        input: { token: logics.aavev3.mainnetTokens.ETH, amount: '1' },
         tokenOut: logics.aavev3.mainnetTokens.aEthWETH,
       },
       {
-        input: new common.TokenAmount(logics.aavev3.mainnetTokens.USDC, '1'),
+        input: { token: logics.aavev3.mainnetTokens.USDC, amount: '1' },
         tokenOut: logics.aavev3.mainnetTokens.aEthUSDC,
       },
     ];
