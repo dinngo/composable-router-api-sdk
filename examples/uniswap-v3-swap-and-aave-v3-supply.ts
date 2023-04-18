@@ -42,8 +42,8 @@ it('Uniswap V3 Swap + Aave V3 Supply', async function () {
   });
 
   // Step 2.
-  // Use `api.protocols.uniswapv3.newSwapTokenFormData` to build the swap Logic data.
-  const swapLogic = api.protocols.uniswapv3.newSwapTokenFormData(swapQuotation);
+  // Use `api.protocols.uniswapv3.newSwapTokenLogic` to build the swap Logic data.
+  const swapLogic = api.protocols.uniswapv3.newSwapTokenLogic(swapQuotation);
 
   // Step 3.
   // Use `api.protocols.aavev3.getSupplyQuotation` to get a quote for supplying WBTC, which will essentially
@@ -54,14 +54,14 @@ it('Uniswap V3 Swap + Aave V3 Supply', async function () {
   });
 
   // Step 4.
-  // Use `api.protocols.aavev3.newSupplyFormData` to build the supply Logic data.
-  const supplyLogic = api.protocols.aavev3.newSupplyFormData(supplyQuotation);
+  // Use `api.protocols.aavev3.newSupplyLogic` to build the supply Logic data.
+  const supplyLogic = api.protocols.aavev3.newSupplyLogic(supplyQuotation);
 
   // Step 5.
-  // Next, prepare the Router Form Data, which will basically include chainId, account, logics, and slippage data.
+  // Next, prepare the Router Data, which will basically include chainId, account, logics, and slippage data.
   // Additionally, slippage is optional and defaults to 1%. If customization is desired, the type should be a number,
   // and the value should be in Basis Points, where 1 Basis Point equals 0.01%.
-  const routerFormData: api.RouterFormData = {
+  const routerData: api.RouterData = {
     chainId,
     account: '0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa',
     logics: [swapLogic, supplyLogic],
@@ -69,11 +69,11 @@ it('Uniswap V3 Swap + Aave V3 Supply', async function () {
   };
 
   // Step 6.
-  // Next, use `api.estimateRouterFormData` to estimate how much funds will be spent (funds) and
+  // Next, use `api.estimateRouterData` to estimate how much funds will be spent (funds) and
   // how many balances will be obtained (balances) from this transaction.
   // It will also identify any approvals that the user needs to execute (approvals) before the transaction
   // and whether there is any permit2 data that the user needs to sign before proceeding (permitData).
-  const estimateResult = await api.estimateRouterFormData(routerFormData);
+  const estimateResult = await api.estimateRouterData(routerData);
   expect(estimateResult).to.include.all.keys('funds', 'balances', 'approvals', 'permitData');
   expect(estimateResult.funds).to.have.lengthOf(1);
   expect(estimateResult.funds.get(USDC).amount).to.be.eq('1000');
@@ -83,16 +83,16 @@ it('Uniswap V3 Swap + Aave V3 Supply', async function () {
 
   // Step 7.
   // If there is any permit2 data that needs to be signed, the signed permit data and signature
-  // should be added to the original Router Form Data.
+  // should be added to the original Router Data.
   const permitSig =
     '0xbb8d0cf3e494c2ed4dc1057ee31c90cab5387b8a606019cc32a6d12f714303df183b1b0cd7a1114bd952a4c533ac18606056dda61f922e030967df0836cf76f91c'; // for example
-  routerFormData.permitData = estimateResult.permitData;
-  routerFormData.permitSig = permitSig;
+  routerData.permitData = estimateResult.permitData;
+  routerData.permitSig = permitSig;
 
   // Step 8.
   // Next, use `api.buildRouterTransactionRequest` to get the transaction request to be sent,
   // which will essentially include the Router contract address (to), transaction data (data),
   // and ETH to be carried in the transaction (value).
-  const transactionRequest = await api.buildRouterTransactionRequest(routerFormData);
+  const transactionRequest = await api.buildRouterTransactionRequest(routerData);
   expect(transactionRequest).to.include.all.keys('to', 'data', 'value');
 });
