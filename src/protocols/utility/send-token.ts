@@ -1,13 +1,13 @@
-import { Declasifying, LogicFormData } from 'src/types';
+import { Declasifying, Logic } from 'src/types';
 import { getProtocolTokenList } from 'src/api';
 import * as logics from '@furucombo/composable-router-logics';
 import { v4 as uuidv4 } from 'uuid';
 
 export type SendTokenFields = Declasifying<logics.utility.SendTokenLogicFields>;
 
-export type SendTokenFormData = LogicFormData<SendTokenFields>;
+export type SendTokenLogic = Logic<SendTokenFields>;
 
-export function newSendTokenFormData(fields: SendTokenFields): SendTokenFormData {
+export function newSendTokenLogic(fields: SendTokenFields): SendTokenLogic {
   return { id: uuidv4(), rid: logics.utility.SendTokenLogic.rid, fields };
 }
 

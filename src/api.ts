@@ -1,4 +1,4 @@
-import { RouterFormData, RouterFormDataEstimateResult } from './types';
+import { RouterData, RouterDataEstimateResult } from './types';
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
 import { classifying } from './utils';
@@ -20,14 +20,12 @@ export async function quote(chainId: number, rid: string, data: any) {
   return classifying(resp.data);
 }
 
-export async function estimateRouterFormData(routerFormData: RouterFormData): Promise<RouterFormDataEstimateResult> {
-  const resp = await client.post('/v1/transactions?isEstimate=true', routerFormData);
+export async function estimateRouterData(routerData: RouterData): Promise<RouterDataEstimateResult> {
+  const resp = await client.post('/v1/transactions?isEstimate=true', routerData);
   return classifying(resp.data);
 }
 
-export async function buildRouterTransactionRequest(
-  routerFormData: RouterFormData
-): Promise<common.TransactionRequest> {
-  const resp = await client.post('/v1/transactions', routerFormData);
+export async function buildRouterTransactionRequest(routerData: RouterData): Promise<common.TransactionRequest> {
+  const resp = await client.post('/v1/transactions', routerData);
   return resp.data;
 }

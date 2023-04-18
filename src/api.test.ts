@@ -1,5 +1,5 @@
-import { RouterFormData } from './types';
-import { buildRouterTransactionRequest, estimateRouterFormData, getProtocolTokenList, quote } from './api';
+import { RouterData } from './types';
+import { buildRouterTransactionRequest, estimateRouterData, getProtocolTokenList, quote } from './api';
 import * as common from '@furucombo/composable-router-common';
 import { expect } from 'chai';
 import * as logics from '@furucombo/composable-router-logics';
@@ -19,15 +19,15 @@ describe('API client', function () {
     expect(quotation).to.have.any.keys('path', 'fee');
   });
 
-  const routerFormData: RouterFormData = {
+  const routerData: RouterData = {
     chainId: common.ChainId.mainnet,
     account: '0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa',
     logics: [
-      utility.newSendTokenFormData({
+      utility.newSendTokenLogic({
         input: { token: mainnetTokens.ETH, amount: '1' },
         recipient: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
       }),
-      utility.newSendTokenFormData({
+      utility.newSendTokenLogic({
         input: { token: mainnetTokens.USDC, amount: '1' },
         recipient: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
       }),
@@ -35,13 +35,13 @@ describe('API client', function () {
     slippage: 100,
   };
 
-  it('Test estimateRouterFormData', async function () {
-    const estimateResult = await estimateRouterFormData(routerFormData);
+  it('Test estimateRouterData', async function () {
+    const estimateResult = await estimateRouterData(routerData);
     expect(estimateResult).to.include.all.keys('funds', 'balances', 'approvals', 'permitData');
   });
 
   it('Test buildRouterTransactionRequest', async function () {
-    const transactionRequest = await buildRouterTransactionRequest(routerFormData);
+    const transactionRequest = await buildRouterTransactionRequest(routerData);
     expect(transactionRequest).to.include.all.keys('to', 'data', 'value');
   });
 });

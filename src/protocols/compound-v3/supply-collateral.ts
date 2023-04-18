@@ -1,13 +1,13 @@
-import { Declasifying, LogicFormData } from 'src/types';
+import { Declasifying, Logic } from 'src/types';
 import { getProtocolTokenList } from 'src/api';
 import * as logics from '@furucombo/composable-router-logics';
 import { v4 as uuidv4 } from 'uuid';
 
 export type SupplyCollateralFields = Declasifying<logics.compoundv3.SupplyCollateralLogicFields>;
 
-export type SupplyCollateralFormData = LogicFormData<SupplyCollateralFields>;
+export type SupplyCollateralLogic = Logic<SupplyCollateralFields>;
 
-export function newSupplyCollateralFormData(fields: SupplyCollateralFields): SupplyCollateralFormData {
+export function newSupplyCollateralLogic(fields: SupplyCollateralFields): SupplyCollateralLogic {
   return { id: uuidv4(), rid: logics.compoundv3.SupplyCollateralLogic.rid, fields };
 }
 

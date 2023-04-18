@@ -34,23 +34,23 @@ export type Declasifying<T> = T extends Array<infer U>
     }
   : T;
 
-export interface LogicFormData<TFields = any> {
+export interface Logic<TFields = any> {
   id: string;
   rid: string;
   fields: TFields;
 }
 
-export interface RouterFormData {
+export interface RouterData {
   chainId: number;
   account: string;
   slippage?: number;
-  logics: LogicFormData[];
+  logics: Logic[];
   permitData?: PermitSingleData | PermitBatchData;
   permitSig?: string;
   referralCode?: number;
 }
 
-export interface RouterFormDataEstimateResult {
+export interface RouterDataEstimateResult {
   funds: common.TokenAmounts;
   balances: common.TokenAmounts;
   approvals: common.TransactionRequest[];
@@ -61,4 +61,4 @@ export type FlashLoanLogicFields = TokensOutFields<{ id: string; isLoan: boolean
 
 export type FlashLoanFields = Declasifying<FlashLoanLogicFields>;
 
-export type FlashLoanFormData = LogicFormData<FlashLoanFields>;
+export type FlashLoanLogic = Logic<FlashLoanFields>;

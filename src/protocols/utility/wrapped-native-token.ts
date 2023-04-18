@@ -1,4 +1,4 @@
-import { Declasifying, LogicFormData } from 'src/types';
+import { Declasifying, Logic } from 'src/types';
 import { getProtocolTokenList, quote } from 'src/api';
 import * as logics from '@furucombo/composable-router-logics';
 import { v4 as uuidv4 } from 'uuid';
@@ -7,9 +7,9 @@ export type WrappedNativeTokenParams = Declasifying<logics.utility.WrappedNative
 
 export type WrappedNativeTokenFields = Declasifying<logics.utility.WrappedNativeTokenLogicFields>;
 
-export type WrappedNativeTokenFormData = LogicFormData<WrappedNativeTokenFields>;
+export type WrappedNativeTokenLogic = Logic<WrappedNativeTokenFields>;
 
-export function newWrappedNativeTokenFormData(fields: WrappedNativeTokenFields): WrappedNativeTokenFormData {
+export function newWrappedNativeTokenLogic(fields: WrappedNativeTokenFields): WrappedNativeTokenLogic {
   return { id: uuidv4(), rid: logics.utility.WrappedNativeTokenLogic.rid, fields };
 }
 

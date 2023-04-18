@@ -1,4 +1,4 @@
-import { Declasifying, LogicFormData } from 'src/types';
+import { Declasifying, Logic } from 'src/types';
 import { getProtocolTokenList, quote } from 'src/api';
 import * as logics from '@furucombo/composable-router-logics';
 import { v4 as uuidv4 } from 'uuid';
@@ -7,9 +7,9 @@ export type WithdrawBaseParams = Declasifying<logics.compoundv3.WithdrawBaseLogi
 
 export type WithdrawBaseFields = Declasifying<logics.compoundv3.WithdrawBaseLogicFields>;
 
-export type WithdrawBaseFormData = LogicFormData<WithdrawBaseFields>;
+export type WithdrawBaseLogic = Logic<WithdrawBaseFields>;
 
-export function newWithdrawBaseFormData(fields: WithdrawBaseFields): WithdrawBaseFormData {
+export function newWithdrawBaseLogic(fields: WithdrawBaseFields): WithdrawBaseLogic {
   return { id: uuidv4(), rid: logics.compoundv3.WithdrawBaseLogic.rid, fields };
 }
 

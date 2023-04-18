@@ -1,4 +1,4 @@
-import { Declasifying, LogicFormData } from 'src/types';
+import { Declasifying, Logic } from 'src/types';
 import { getProtocolTokenList, quote } from 'src/api';
 import * as logics from '@furucombo/composable-router-logics';
 import { v4 as uuidv4 } from 'uuid';
@@ -7,9 +7,9 @@ export type DepositParams = Declasifying<logics.aavev2.DepositLogicParams>;
 
 export type DepositFields = Declasifying<logics.aavev2.DepositLogicFields>;
 
-export type DepositFormData = LogicFormData<DepositFields>;
+export type DepositLogic = Logic<DepositFields>;
 
-export function newDepositFormData(fields: DepositFields): DepositFormData {
+export function newDepositLogic(fields: DepositFields): DepositLogic {
   return { id: uuidv4(), rid: logics.aavev2.DepositLogic.rid, fields };
 }
 
