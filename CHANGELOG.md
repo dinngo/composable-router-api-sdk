@@ -1,5 +1,16 @@
 # @furucombo/composable-router-api
 
+## 0.1.5
+
+### Patch Changes
+
+- 26ff6b8: rename LogicFormData to Logic
+- 8f55868: add aave v3 swap and supply example
+- 4d761a6: Updated dependencies
+  - @furucombo/composable-router-common@0.1.4
+  - @furucombo/composable-router-core@0.1.4
+  - @types/lodash@4.14.194
+
 ## 0.1.4
 
 ### Patch Changes
