@@ -1,17 +1,12 @@
 import { Declasifying, Logic } from 'src/types';
 import { getProtocolTokenList, quote } from 'src/api';
 import * as logics from '@furucombo/composable-router-logics';
-import { v4 as uuidv4 } from 'uuid';
 
 export type WrappedNativeTokenParams = Declasifying<logics.utility.WrappedNativeTokenLogicParams>;
 
 export type WrappedNativeTokenFields = Declasifying<logics.utility.WrappedNativeTokenLogicFields>;
 
 export type WrappedNativeTokenLogic = Logic<WrappedNativeTokenFields>;
-
-export function newWrappedNativeTokenLogic(fields: WrappedNativeTokenFields): WrappedNativeTokenLogic {
-  return { id: uuidv4(), rid: logics.utility.WrappedNativeTokenLogic.rid, fields };
-}
 
 export async function getWrappedNativeTokenTokenList(
   chainId: number
@@ -24,4 +19,8 @@ export async function getWrappedNativeTokenQuotation(
   params: WrappedNativeTokenParams
 ): Promise<logics.utility.WrappedNativeTokenLogicFields> {
   return quote(chainId, logics.utility.WrappedNativeTokenLogic.rid, params);
+}
+
+export function newWrappedNativeTokenLogic(fields: WrappedNativeTokenFields): WrappedNativeTokenLogic {
+  return { rid: logics.utility.WrappedNativeTokenLogic.rid, fields };
 }

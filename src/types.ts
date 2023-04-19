@@ -35,7 +35,6 @@ export type Declasifying<T> = T extends Array<infer U>
   : T;
 
 export interface Logic<TFields = any> {
-  id: string;
   rid: string;
   fields: TFields;
 }
