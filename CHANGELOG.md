@@ -1,5 +1,13 @@
 # @furucombo/composable-router-api
 
+## 0.1.6
+
+### Patch Changes
+
+- 67fa373: update example with v0.1.5
+- 5bfb0f3: README.md add npm version badge
+- 9014afe: remove Logic.id
+
 ## 0.1.5
 
 ### Patch Changes
