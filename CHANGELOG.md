@@ -1,5 +1,11 @@
 # @furucombo/composable-router-api
 
+## 0.1.7
+
+### Patch Changes
+
+- 20c2559: add newFlashLoanLogicPair func
+
 ## 0.1.6
 
 ### Patch Changes
