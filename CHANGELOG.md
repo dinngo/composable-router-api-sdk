@@ -1,5 +1,12 @@
 # @furucombo/composable-router-api
 
+## 0.1.8
+
+### Patch Changes
+
+- ae47156: add utility custom data logic types and funcs
+- e6957f5: add protocol logics' types and funcs examples
+
 ## 0.1.7
 
 ### Patch Changes
