@@ -1,5 +1,11 @@
 # @furucombo/composable-router-api
 
+## 0.1.9
+
+### Patch Changes
+
+- af20ad7: fix export utility custom data logic issue
+
 ## 0.1.8
 
 ### Patch Changes
