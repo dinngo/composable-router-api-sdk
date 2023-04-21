@@ -1,5 +1,11 @@
 # @furucombo/composable-router-api
 
+## 0.1.10
+
+### Patch Changes
+
+- 5f471b4: extend Classifying and Declasifying for `common.TokenAmounts | undefined` type
+
 ## 0.1.9
 
 ### Patch Changes
