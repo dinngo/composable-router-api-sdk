@@ -14,6 +14,8 @@ export type Classifying<T> = T extends Array<infer U>
         ? common.TokenAmount
         : T[K] extends common.TokenAmountObject[]
         ? common.TokenAmounts
+        : T[K] extends common.TokenAmountObject[] | undefined
+        ? common.TokenAmounts | undefined
         : T[K];
     }
   : T;
@@ -30,6 +32,8 @@ export type Declasifying<T> = T extends Array<infer U>
         ? common.TokenAmountObject
         : T[K] extends common.TokenAmounts
         ? common.TokenAmountObject[]
+        : T[K] extends common.TokenAmounts | undefined
+        ? common.TokenAmountObject[] | undefined
         : T[K];
     }
   : T;
