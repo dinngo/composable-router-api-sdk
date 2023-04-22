@@ -647,10 +647,10 @@
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/strings" "^5.7.0"
 
-"@furucombo/composable-router-api@^0.1.9":
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/@furucombo/composable-router-api/-/composable-router-api-0.1.9.tgz#6551ebd44be9d3f2a6a6d76a28bd85b10c7c4155"
-  integrity sha512-YqZ7YCMGHlNJq9PuI4GEg2LkTu3gKjE8RIVL4JZMPDrEO8Rkq96rcUuKtf6iuCRMe4yGG+vzZcr0WXKqEW+3dA==
+"@furucombo/composable-router-api@^0.1.10":
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/@furucombo/composable-router-api/-/composable-router-api-0.1.10.tgz#e9bedb6567ee6fe2df7da1a831caa2bb2834f60f"
+  integrity sha512-gNAujoAREMyZZFXfp3F+d1WOjCEFqD9e+iFyKcLS7mDOEAZA3I+RiWyy+PB2vCCxTLVvMOXfdiQZdqxjnt6B5Q==
   dependencies:
     "@furucombo/composable-router-common" "^0.1.4"
     "@furucombo/composable-router-core" "^0.1.4"
