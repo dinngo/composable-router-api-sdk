@@ -1,5 +1,12 @@
 # @furucombo/composable-router-api
 
+## 0.1.12
+
+### Patch Changes
+
+- 08e6e96: remove RouterData.slippage
+- a3eadcd: update examples for slippage
+
 ## 0.1.11
 
 ### Patch Changes
