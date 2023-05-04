@@ -18,6 +18,7 @@ import * as api from '@furucombo/composable-router-api';
 //     symbol: string;
 //     name: string;
 //   };
+//   slippage?: number;
 // }
 
 // interface SwapTokenFields {
@@ -41,6 +42,7 @@ import * as api from '@furucombo/composable-router-api';
 //     };
 //     amount: string;
 //   };
+//   slippage?: number;
 // }
 
 // interface SwapTokenLogic {
@@ -63,6 +65,7 @@ import * as api from '@furucombo/composable-router-api';
       amount: '10',
     },
     tokenOut,
+    slippage: 100,
   });
   console.log('swapTokenQuotation :>> ', JSON.stringify(swapTokenQuotation, null, 2));
 

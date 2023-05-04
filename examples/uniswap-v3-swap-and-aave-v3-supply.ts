@@ -36,9 +36,12 @@ it('Uniswap V3 Swap + Aave V3 Supply', async function () {
   // Step 1.
   // Use `api.protocols.uniswapv3.getSwapTokenQuotation` to get a quote for
   // exchanging 1000 USDC to WBTC on Uniswap V3.
+  // Additionally, slippage is optional. The type should be a number,
+  // and the value should be in Basis Points, where 1 Basis Point equals 0.01%.
   const swapQuotation = await api.protocols.uniswapv3.getSwapTokenQuotation(chainId, {
     input: { token: USDC, amount: '1000' },
     tokenOut: WBTC,
+    slippage: 100, // 1%
   });
 
   // Step 2.
@@ -58,14 +61,11 @@ it('Uniswap V3 Swap + Aave V3 Supply', async function () {
   const supplyLogic = api.protocols.aavev3.newSupplyLogic(supplyQuotation);
 
   // Step 5.
-  // Next, prepare the Router Data, which will basically include chainId, account, logics, and slippage data.
-  // Additionally, slippage is optional and defaults to 1%. If customization is desired, the type should be a number,
-  // and the value should be in Basis Points, where 1 Basis Point equals 0.01%.
+  // Next, prepare the Router Data, which will basically include chainId, account, and logics data.
   const routerData: api.RouterData = {
     chainId,
     account: '0xaAaAaAaaAaAaAaaAaAAAAAAAAaaaAaAaAaaAaaAa',
     logics: [swapLogic, supplyLogic],
-    slippage: 300, // 3%
   };
 
   // Step 6.

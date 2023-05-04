@@ -19,6 +19,7 @@ import * as api from '@furucombo/composable-router-api';
 //         symbol: string;
 //         name: string;
 //       };
+//       slippage?: number;
 //     }
 //   | {
 //       tokenIn: {
@@ -38,10 +39,11 @@ import * as api from '@furucombo/composable-router-api';
 //         };
 //         amount: string;
 //       };
+//       slippage?: number;
 //     };
 
 // import * as core from '@furucombo/composable-router-core';
-//
+
 // interface SwapTokenFields {
 //   tradeType: core.TradeType;
 //   input: {
@@ -66,6 +68,7 @@ import * as api from '@furucombo/composable-router-api';
 //   };
 //   fee?: number;
 //   path?: string;
+//   slippage?: number;
 // }
 
 // interface SwapTokenLogic {
@@ -88,6 +91,7 @@ import * as api from '@furucombo/composable-router-api';
       amount: '10',
     },
     tokenOut,
+    slippage: 100,
   });
   console.log('swapTokenQuotation :>> ', JSON.stringify(swapTokenQuotation, null, 2));
 
