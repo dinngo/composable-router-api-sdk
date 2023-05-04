@@ -46,7 +46,6 @@ export interface Logic<TFields = any> {
 export interface RouterData {
   chainId: number;
   account: string;
-  slippage?: number;
   logics: Logic[];
   permitData?: PermitSingleData | PermitBatchData;
   permitSig?: string;

@@ -32,7 +32,6 @@ describe('API client', function () {
         recipient: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB',
       }),
     ],
-    slippage: 100,
   };
 
   it('Test estimateRouterData', async function () {
