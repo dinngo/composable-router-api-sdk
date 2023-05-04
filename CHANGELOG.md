@@ -1,5 +1,17 @@
 # @furucombo/composable-router-api
 
+## 0.1.11
+
+### Patch Changes
+
+- 301df1f: add utility custom data logic example
+- 97f618e: Updated dependencies
+  - @furucombo/composable-router-common@0.1.5
+  - @furucombo/composable-router-core@0.1.5
+  - @furucombo/composable-router-logics@0.1.8
+  - axios@1.3.6
+  - type-fest@3.9.0
+
 ## 0.1.10
 
 ### Patch Changes
