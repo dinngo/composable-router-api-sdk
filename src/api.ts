@@ -4,7 +4,9 @@ import axiosRetry from 'axios-retry';
 import { classifying } from './utils';
 import * as common from '@furucombo/composable-router-common';
 
-const client = axios.create({ baseURL: 'https://ethtaipei-router-api.furucombo.app' });
+const client = axios.create({
+  baseURL: 'https://t04r3sdpr7.execute-api.us-east-1.amazonaws.com/beta',
+});
 
 axiosRetry(client, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 
