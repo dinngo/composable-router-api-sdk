@@ -1,5 +1,22 @@
 # @furucombo/composable-router-api
 
+## 0.2.0
+
+### Minor Changes
+
+- 532b126: Updated dependencies
+  - @furucombo/composable-router-common@0.2.5
+  - @furucombo/composable-router-core@0.2.5
+  - @furucombo/composable-router-logics@0.2.1
+  - @types/lodash@4.14.195
+  - axios-retry@^3.5.0"
+  - @types/uuid@9.0.2
+  - type-fest@3.12.0
+
+### Patch Changes
+
+- 865443e: update for v0.2.0 router
+
 ## 0.1.12
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@furucombo/composable-router-api",
-  "version": "0.1.12",
+  "version": "0.2.0",
   "description": "Composable Router API SDK",
   "keywords": [
     "furucombo",
@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.1",
-    "@furucombo/composable-router-api": "^0.1.12",
+    "@furucombo/composable-router-api": "^0.2.0",
     "@furucombo/composable-router-test-helpers": "^0.2.5",
     "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.1",
